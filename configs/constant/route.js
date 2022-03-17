@@ -1,9 +1,22 @@
 export const ROUTE = {
-  DASHBOARD: '/dashboard',
-  USER: '/users',
+  DASHBOARD: {
+    TITLE: 'Dashboard',
+    URL: '/dashboard'
+  },
+  USER: {
+    TITLE: 'Users',
+    URL: '/users'
+  },
   CE: {
-    INSTANCE: '/ce/instance',
-    VOLUME: '/ce/volume'
+    TITLE: 'Compute Engine',
+    INSTANCE: {
+      TITLE: 'Instance',
+      URL: '/ce/instance'
+    },
+    VOLUME: {
+      TITLE: 'Volume',
+      URL: '/ce/volume'
+    },
   }
 }
 

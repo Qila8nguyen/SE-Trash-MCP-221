@@ -20,24 +20,24 @@ export const SideMenuLayout = (props) => {
       <div className={styles.logo} />
       <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
         <Menu.Item key='1' icon={<PieChartOutlined />}>
-          <Link href={ROUTE.DASHBOARD}>
-            Dashboard
+          <Link href={ROUTE.DASHBOARD.URL}>
+            {ROUTE.DASHBOARD.TITLE}
           </Link>
         </Menu.Item>
         <Menu.Item key='2' icon={<TeamOutlined />}>
-          <Link href={ROUTE.USER}>
-            Users
+          <Link href={ROUTE.USER.URL}>
+            {ROUTE.USER.TITLE}
           </Link>
         </Menu.Item>
-        <SubMenu key='sub1' icon={<DesktopOutlined />} title='Compute Engine'>
+        <SubMenu key='sub1' icon={<DesktopOutlined />} title={ROUTE.CE.TITLE}>
           <Menu.Item key='3'>
-            <Link href={ROUTE.CE.INSTANCE}>
-              Instance
+            <Link href={ROUTE.CE.INSTANCE.URL}>
+              {ROUTE.CE.INSTANCE.TITLE}
             </Link>
           </Menu.Item>
           <Menu.Item key='4'>
-            <Link href={ROUTE.CE.VOLUME}>
-              Volume
+            <Link href={ROUTE.CE.VOLUME.URL}>
+              {ROUTE.CE.VOLUME.TITLE}
             </Link>
           </Menu.Item>
         </SubMenu>
