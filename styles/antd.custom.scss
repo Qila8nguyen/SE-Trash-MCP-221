@@ -4223,6 +4223,7 @@ a.ant-btn-sm {
   position: relative;
   background: #fff;
   border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 .ant-card-rtl {
   direction: rtl;
@@ -15330,12 +15331,14 @@ textarea.ant-input-number {
   color: rgba(0, 0, 0, 0.65);
   line-height: 64px;
   background: #001529;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 .ant-layout-footer {
   padding: 24px 50px;
   color: rgba(0, 0, 0, 0.65);
   font-size: 14px;
   background: #f0f2f5;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 .ant-layout-content {
   flex: auto;
@@ -15353,6 +15356,7 @@ textarea.ant-input-number {
   height: 100%;
   margin-top: -0.1px;
   padding-top: 0.1px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 .ant-layout-sider-children .ant-menu.ant-menu-inline-collapsed {
   width: auto;

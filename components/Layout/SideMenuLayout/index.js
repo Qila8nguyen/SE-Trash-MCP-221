@@ -32,12 +32,12 @@ export const SideMenuLayout = (props) => {
         <SubMenu key='sub1' icon={<DesktopOutlined />} title={ROUTE.CE.TITLE}>
           <Menu.Item key='3'>
             <Link href={ROUTE.CE.INSTANCE.URL}>
-              {ROUTE.CE.INSTANCE.TITLE}
+              {`${ROUTE.CE.INSTANCE.TITLE} (10)`}
             </Link>
           </Menu.Item>
           <Menu.Item key='4'>
             <Link href={ROUTE.CE.VOLUME.URL}>
-              {ROUTE.CE.VOLUME.TITLE}
+              {`${ROUTE.CE.VOLUME.TITLE} (9)`}
             </Link>
           </Menu.Item>
         </SubMenu>

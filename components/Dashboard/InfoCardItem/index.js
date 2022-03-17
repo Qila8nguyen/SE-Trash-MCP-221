@@ -6,7 +6,7 @@ export const InfoCardItem = (props) => {
   const { title, amount, color = '#C8FACD', className, style, valueColor} = props
 
   return (
-    <div className={className || styles['info-card']} style={{ ...style, backgroundColor: color}}>
+    <div className={className} style={{ ...style, backgroundColor: color}}>
       <Statistic
         titleStyle
         valueStyle={{fontSize: 30, fontWeight: 500, color: valueColor}}
