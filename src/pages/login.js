@@ -1,12 +1,14 @@
 import React from 'react'
-import { Form, Input, Button, Checkbox, Image } from 'antd'
+import { Form, Input, Button, Checkbox, Image, Space } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import githubIcon from '../public/asset/login/github.png'
+import googleIcon from '../public/asset/login/google.png'
 import loginWallpaper from '../public/asset/login/wallpaper.gif'
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { AUTH } from '../configs/constant'
 
 const Login = () => {
+  const { status } = useSession()
   const onFinish = values => {
     console.log('Success:', values)
   }
@@ -14,6 +16,8 @@ const Login = () => {
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo)
   }
+
+  if (status === AUTH.STATUS.AUTHENTICATED) return <div/>
 
   return (
     <div className='login-page'>
@@ -65,18 +69,29 @@ const Login = () => {
             <Text>Or</Text>
           </div>
 
-          <Button htmlType='submit' className='login-form-button'
+          <Space direction='vertical' style={{width:'100%'}}>
+            <Button className='login-form-button'>
+              <a
+                onClick={() => {
+                  signIn(AUTH.PROVIDERS.GITHUB)
+                }}
+              >
+                Login with Github&nbsp;
+                <Image style={{paddingBottom:3}} preview={false} width={20} alt='GithubIcon' src={githubIcon.src}/>
+              </a>
+            </Button>
 
-          >
-            <a
-              onClick={() => {
-                signIn(AUTH.PROVIDERS.GITHUB)
-              }}
-            >
-              Login with Github&nbsp;
-              <Image style={{paddingBottom:3}} preview={false} width={20} alt='GithubIcon' src={githubIcon.src}/>
-            </a>
-          </Button>
+            <Button className='login-form-button'>
+              <a
+                onClick={() => {
+                  signIn(AUTH.PROVIDERS.GOOGLE)
+                }}
+              >
+                Login with Google&nbsp;
+                <Image style={{paddingBottom:3}} preview={false} width={20} alt='GoogleIcon' src={googleIcon.src}/>
+              </a>
+            </Button>
+          </Space>
         </Form>
       </div>
     </div>

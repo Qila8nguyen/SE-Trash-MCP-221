@@ -6,7 +6,8 @@ export const AUTH = {
   },
   PROVIDERS: {
     GITHUB: 'github',
-    APPLE: 'apple'
+    APPLE: 'apple',
+    GOOGLE: 'google'
   }
 }
 
