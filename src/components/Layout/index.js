@@ -12,11 +12,10 @@ const { Content, Footer } = Layout
 
 const MainLayout = (props) => {
   const { children } = props
-  const { data, status } = useSession()
+  const { status } = useSession()
   const router = useRouter()
 
   const [collapsed, setCollapsed] = useState(false)
-  console.log('data :>> ', data)
 
   const moveToDashboard = (route) => {
     if (route === ROUTE.BASE.URL || route === ROUTE.LOGIN.URL)

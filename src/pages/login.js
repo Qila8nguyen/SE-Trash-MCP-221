@@ -1,9 +1,9 @@
 import React from 'react'
-import { Form, Input, Button, Checkbox, Image, Space } from 'antd'
+import { Form, Input, Button, Checkbox, Image, Space, Spin } from 'antd'
 import Text from 'antd/lib/typography/Text'
 import githubIcon from '../public/asset/login/github.png'
 import googleIcon from '../public/asset/login/google.png'
-import loginWallpaper from '../public/asset/login/wallpaper.gif'
+import loginWallpaper from '../public/asset/login/wallpaper.png'
 import { signIn, useSession } from "next-auth/react"
 import { AUTH } from '../configs/constant'
 
@@ -17,13 +17,14 @@ const Login = () => {
     console.log('Failed:', errorInfo)
   }
 
-  if (status === AUTH.STATUS.AUTHENTICATED) return <div/>
+  if (status === AUTH.STATUS.AUTHENTICATED) return <Spin/>
 
   return (
     <div className='login-page'>
       <div className='login-box'>
         <div className='illustration-wrapper'>
           <Image
+            className='illustration-wrapper'
             src={loginWallpaper.src}
             preview={false}
             alt='LoginWallpaper'
