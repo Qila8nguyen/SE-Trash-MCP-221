@@ -1,18 +1,14 @@
 import MainLayout from '../components/Layout'
 import '../styles/globals.scss'
-import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React from 'react'
+import { SessionProvider } from "next-auth/react"
 
 function MyApp({ Component, pageProps }) {
-  const router = useRouter()
-
-  useEffect(() => {
-    if (router.route === '/') router.push('/dashboard')
-  }, [router])
-
-  return <MainLayout>
-    <Component {...pageProps} />
-  </MainLayout>
+  return <SessionProvider session={pageProps.session} refetchInterval={0}>
+    <MainLayout>
+      <Component {...pageProps} />
+    </MainLayout>
+  </SessionProvider>
 }
 
 export default MyApp

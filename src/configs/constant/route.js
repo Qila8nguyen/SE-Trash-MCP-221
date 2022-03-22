@@ -1,4 +1,15 @@
 export const ROUTE = {
+  BASE: {
+    URL: '/'
+  },
+  LOGIN: {
+    TITLE: 'Log In',
+    URL: '/login'
+  },
+  REGISTER: {
+    TITLE: 'Register',
+    URL: '/register'
+  },
   DASHBOARD: {
     TITLE: 'Dashboard',
     URL: '/dashboard'

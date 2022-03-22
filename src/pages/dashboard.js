@@ -1,14 +1,17 @@
 import { Card, Col, Row, Space } from 'antd'
 import Typography from 'antd/lib/typography'
+import { useSession } from 'next-auth/react'
 import React from 'react'
 import { InfoCard } from '../components/Dashboard'
 
 const { Title } = Typography
 const Dashboard = () => {
+  const { data: session } = useSession()
+
   return (
     <div>
       <Title>
-        Welcome back, khapk
+        Welcome back, {session?.user.name}
       </Title>
       <InfoCard/>
 
