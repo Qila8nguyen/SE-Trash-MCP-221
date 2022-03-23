@@ -12,27 +12,26 @@ import { signOut, useSession } from 'next-auth/react'
 
 const { Header } = Layout
 
-const userMenu = (
-  <Menu style={{paddingTop: 10, paddingBottom: 10}}>
-    <Menu.Item
-      key="1" icon={<LogoutOutlined />}
-      onClick={() => {
-        signOut()
-      }}
-    >
-      Log out
-    </Menu.Item>
-  </Menu>
-)
-
 export const HeaderLayout = (props) => {
   const { collapsed, setCollapsed } = props
-
   const { data: session } = useSession()
 
   const toggle = () => {
     setCollapsed(!collapsed)
   }
+
+  const userMenu = (
+    <Menu style={{paddingTop: 10, paddingBottom: 10}}>
+      <Menu.Item
+        key="1" icon={<LogoutOutlined />}
+        onClick={() => {
+          signOut()
+        }}
+      >
+        Log out
+      </Menu.Item>
+    </Menu>
+  )
 
   return (
     <Header className={styles['site-layout-background']} style={{ padding: 0 }}>
@@ -44,7 +43,7 @@ export const HeaderLayout = (props) => {
         <div style={{ paddingRight: 20 }}>
           <Dropdown overlay={userMenu}>
             <Button style={{ fontWeight: 700}}>
-              <UserOutlined/> {session.user.email} <DownOutlined />
+              <UserOutlined/> {session?.user.email} <DownOutlined />
             </Button>
           </Dropdown>
         </div>

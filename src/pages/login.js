@@ -1,14 +1,17 @@
-import React from 'react'
-import { Form, Input, Button, Checkbox, Image, Space, Spin } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Form, Input, Button, Checkbox, Image, Space, Spin, notification } from 'antd'
 import Text from 'antd/lib/typography/Text'
-import githubIcon from '../public/asset/login/github.png'
-import googleIcon from '../public/asset/login/google.png'
 import loginWallpaper from '../public/asset/login/wallpaper.png'
-import { signIn, useSession } from "next-auth/react"
-import { AUTH } from '../configs/constant'
+import { signIn, useSession, getProviders } from "next-auth/react"
+import { AUTH, IMAGE } from '../configs/constant'
+import { useRouter } from 'next/router'
 
 const Login = () => {
   const { status } = useSession()
+  const router = useRouter()
+
+  const [loginProviders, setLoginProviders] = useState(null)
+
   const onFinish = values => {
     console.log('Success:', values)
   }
@@ -17,7 +20,22 @@ const Login = () => {
     console.log('Failed:', errorInfo)
   }
 
-  if (status === AUTH.STATUS.AUTHENTICATED) return <Spin/>
+  useEffect(() => {
+    getProviders()
+      .then(providers => {
+        setLoginProviders(providers)
+      })
+      .catch(err => {
+        notification.error({
+          placement: 'topRight',
+          message: err.message,
+          description: 'Cannot get log in providers'
+        })
+      })
+    router.prefetch('/dashboard')
+  }, [])
+
+  if (status === AUTH.STATUS.AUTHENTICATED) return <Spin className='center'/>
 
   return (
     <div className='login-page'>
@@ -71,27 +89,14 @@ const Login = () => {
           </div>
 
           <Space direction='vertical' style={{width:'100%'}}>
-            <Button className='login-form-button'>
-              <a
-                onClick={() => {
-                  signIn(AUTH.PROVIDERS.GITHUB)
-                }}
-              >
-                Login with Github&nbsp;
-                <Image style={{paddingBottom:3}} preview={false} width={20} alt='GithubIcon' src={githubIcon.src}/>
-              </a>
-            </Button>
-
-            <Button className='login-form-button'>
-              <a
-                onClick={() => {
-                  signIn(AUTH.PROVIDERS.GOOGLE)
-                }}
-              >
-                Login with Google&nbsp;
-                <Image style={{paddingBottom:3}} preview={false} width={20} alt='GoogleIcon' src={googleIcon.src}/>
-              </a>
-            </Button>
+            {loginProviders && Object.values(loginProviders).map((provider) => (
+              <Button key={provider.name} className='login-form-button' onClick={() => {
+                signIn(provider.id)
+              }}>
+                Log in with {provider.name}&nbsp;
+                <Image style={{paddingBottom:3}} preview={false} width={20} alt='providerIcon' src={IMAGE[provider.id].src}/>
+              </Button>
+            ))}
           </Space>
         </Form>
       </div>
