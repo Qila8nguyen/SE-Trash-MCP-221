@@ -1,28 +1,50 @@
 import MainLayout from '../components/Layout'
 import '../styles/globals.scss'
 import React from 'react'
-import { SessionProvider } from "next-auth/react"
+import { getSession, SessionProvider } from "next-auth/react"
 import Router from '../components/Router'
 
-function MyApp({ Component, pageProps }) {
-  const { session, user } = pageProps
-
-  return <SessionProvider session={session} refetchInterval={0}>
+function MyApp({ Component, pageProps, data }) {
+  return <SessionProvider session={pageProps?.session} refetchInterval={0}>
     <Router>
-      <MainLayout user={user}>
+      <MainLayout sideMenuData={data?.sideMenuData}>
         <Component {...pageProps} />
       </MainLayout>
     </Router>
   </SessionProvider>
 }
 
-export default MyApp
+MyApp.getInitialProps = async (context) => {
+  const sideMenuData = [
+    {
+      name: 'Dashboard',
+      route: '/dashboard'
+    },
+    {
+      name: 'Users',
+      route: '/users'
+    },
+    {
+      name: 'Compute Engine',
+      route: [
+        {
+          name: 'Instance',
+          route: '/ce/instance'
+        },
+        {
+          name: 'Volume',
+          route: '/ce/volume'
+        }
+      ]
+    }
+  ]
 
-export async function getStaticProps(context) {
   return {
-    props: {user: {
-      email: 'khapham.7165@gmail.com',
-      showing: ['a', 'b', 'c']
-    }}, // will be passed to the page component as props
+    data: {
+      sideMenuData,
+    }
   }
 }
+
+export default MyApp
+

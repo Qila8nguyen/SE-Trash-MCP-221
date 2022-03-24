@@ -13,34 +13,46 @@ const { Sider } = Layout
 const { SubMenu } = Menu
 
 export const SideMenuLayout = (props) => {
-  const { collapsed } = props
+  const { collapsed, sideMenuData } = props
+
+  const mapNameToIcon = (name) => {
+    switch (name) {
+      case ROUTE.DASHBOARD.TITLE:
+        return <PieChartOutlined />
+      case ROUTE.USER.TITLE:
+        return <TeamOutlined />
+      case ROUTE.CE.TITLE:
+        return <DesktopOutlined />
+      default:
+        break
+    }
+  }
 
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div className={styles.logo} />
       <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
-        <Menu.Item key='1' icon={<PieChartOutlined />}>
-          <Link href={ROUTE.DASHBOARD.URL}>
-            {ROUTE.DASHBOARD.TITLE}
-          </Link>
-        </Menu.Item>
-        <Menu.Item key='2' icon={<TeamOutlined />}>
-          <Link href={ROUTE.USER.URL}>
-            {ROUTE.USER.TITLE}
-          </Link>
-        </Menu.Item>
-        <SubMenu key='sub1' icon={<DesktopOutlined />} title={ROUTE.CE.TITLE}>
-          <Menu.Item key='3'>
-            <Link href={ROUTE.CE.INSTANCE.URL}>
-              {`${ROUTE.CE.INSTANCE.TITLE} (10)`}
+        {sideMenuData.map(data => {
+          const { name, route } = data
+
+          if (Array.isArray(route)) {
+            return <SubMenu key={name} icon={mapNameToIcon(name)} title={name}>
+              {route.map(subData =>
+                <Menu.Item key={subData.name}>
+                  <Link href={subData.route}>
+                    {`${subData.name}`}
+                  </Link>
+                </Menu.Item>
+              )}
+            </SubMenu>
+          }
+
+          return <Menu.Item key={name} icon={mapNameToIcon(name)}>
+            <Link href={route}>
+              {name}
             </Link>
           </Menu.Item>
-          <Menu.Item key='4'>
-            <Link href={ROUTE.CE.VOLUME.URL}>
-              {`${ROUTE.CE.VOLUME.TITLE} (9)`}
-            </Link>
-          </Menu.Item>
-        </SubMenu>
+        })}
       </Menu>
     </Sider>
   )
