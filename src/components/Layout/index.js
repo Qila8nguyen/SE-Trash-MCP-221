@@ -5,12 +5,12 @@ import HeaderLayout from './Header'
 import SideMenuLayout from './SideMenu'
 import { useSession } from 'next-auth/react'
 import { AUTH } from '../../configs/constant'
-import Login from '../../pages/login'
+import Login from '../../pages/auth/login'
 
 const { Content, Footer } = Layout
 
 const MainLayout = (props) => {
-  const { children } = props
+  const { children, user } = props
   const { status } = useSession()
   const [collapsed, setCollapsed] = useState(false)
 
@@ -21,7 +21,7 @@ const MainLayout = (props) => {
   }
 
   return <Layout style = {{ minHeight:'100vh' }}>
-    <SideMenuLayout collapsed={collapsed}/>
+    <SideMenuLayout user={user} collapsed={collapsed}/>
     <Layout className={styles['site-layout']}>
       <HeaderLayout
         setCollapsed={setCollapsed}

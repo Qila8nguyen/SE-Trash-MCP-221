@@ -4,7 +4,8 @@ export const ROUTE = {
   },
   LOGIN: {
     TITLE: 'Log In',
-    URL: '/login'
+    URL: '/auth/login',
+    ERROR_URL: '/auth/login/error'
   },
   REGISTER: {
     TITLE: 'Register',

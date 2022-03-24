@@ -5,7 +5,7 @@ import React from 'react'
 import { InfoCard } from '../components/Dashboard'
 
 const { Title } = Typography
-const Dashboard = () => {
+const Dashboard = (props) => {
   const { data: session } = useSession()
 
   return (

@@ -5,11 +5,11 @@ import { SessionProvider } from "next-auth/react"
 import Router from '../components/Router'
 
 function MyApp({ Component, pageProps }) {
-  const { session } = pageProps
+  const { session, user } = pageProps
 
   return <SessionProvider session={session} refetchInterval={0}>
     <Router>
-      <MainLayout>
+      <MainLayout user={user}>
         <Component {...pageProps} />
       </MainLayout>
     </Router>
@@ -17,3 +17,12 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
+
+export async function getStaticProps(context) {
+  return {
+    props: {user: {
+      email: 'khapham.7165@gmail.com',
+      showing: ['a', 'b', 'c']
+    }}, // will be passed to the page component as props
+  }
+}

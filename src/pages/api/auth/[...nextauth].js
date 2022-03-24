@@ -4,6 +4,7 @@ import FacebookProvider from "next-auth/providers/facebook"
 import GithubProvider from "next-auth/providers/github"
 import TwitterProvider from "next-auth/providers/twitter"
 import Auth0Provider from "next-auth/providers/auth0"
+import { ROUTE } from "../../../configs/constant"
 // import AppleProvider from "next-auth/providers/apple"
 // import EmailProvider from "next-auth/providers/email"
 
@@ -72,7 +73,7 @@ export default NextAuth({
   pages: {
     signIn: '/login',
     signOut: '/auth/signout',
-    error: '/login/error', // Error code passed in query string as ?error=
+    error: ROUTE.LOGIN.ERROR_URL, // Error code passed in query string as ?error=
     verifyRequest: '/auth/verify-request', // (used for check email message)
     newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   }

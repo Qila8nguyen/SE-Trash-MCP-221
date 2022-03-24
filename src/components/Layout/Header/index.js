@@ -9,6 +9,7 @@ import {
 import { Menu, Layout , Dropdown, Button, message, Row } from 'antd'
 import styles from '../styles.module.scss'
 import { signOut, useSession } from 'next-auth/react'
+import { ROUTE } from '../../../configs/constant'
 
 const { Header } = Layout
 
@@ -25,7 +26,9 @@ export const HeaderLayout = (props) => {
       <Menu.Item
         key="1" icon={<LogoutOutlined />}
         onClick={() => {
-          signOut()
+          signOut({
+            callbackUrl: `${window.location.origin}${ROUTE.LOGIN.URL}`
+          })
         }}
       >
         Log out
