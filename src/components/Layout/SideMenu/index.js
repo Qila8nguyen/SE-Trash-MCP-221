@@ -8,12 +8,16 @@ import {
 import styles from '../styles.module.scss'
 import Link from 'next/link'
 import { ROUTE } from '../../../configs/constant'
+import useSWR from 'swr'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export const SideMenuLayout = (props) => {
   const { collapsed } = props
+  // Side menu data structure here
+  const { data, error } = useSWR('/api/userInfo', fetcher)
 
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>

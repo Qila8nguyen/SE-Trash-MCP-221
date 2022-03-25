@@ -16,4 +16,4 @@ const UserSchema = new Schema({
   }]
 }, { versionKey: false, collection: 'users' })
 
-export default mongoose.models?.Users || mongoose.model('User', UserSchema)
+export default mongoose.models?.Users || mongoose.model('Users', UserSchema)

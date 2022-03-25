@@ -1,7 +1,7 @@
 import MainLayout from '../components/Layout'
 import '../styles/globals.scss'
 import React from 'react'
-import { SessionProvider, getSession } from "next-auth/react"
+import { SessionProvider } from "next-auth/react"
 import Router from '../components/Router'
 
 function MyApp({ Component, pageProps }) {
@@ -16,7 +16,3 @@ function MyApp({ Component, pageProps }) {
 
 export default MyApp
 
-MyApp.getInitialProps = async (appContext) => {
-  const session = await getSession(appContext.ctx)
-  return { session }
-}
