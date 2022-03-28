@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Layout, Menu } from 'antd'
 import {
   DesktopOutlined,
@@ -10,16 +10,17 @@ import Link from 'next/link'
 import { ROUTE } from '../../../configs/constant'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
+import { AppContext } from '../../../pages/_app'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export const SideMenuLayout = (props) => {
-  const { collapsed, sideMenuData } = props
+  const { collapsed } = props
   const route = useRouter()
 
-  console.log('sideMenuData', sideMenuData)
+  const { layoutData: sideMenuData } = useContext(AppContext)
 
   const mapNameToIcon = (name) => {
     switch (name) {
@@ -38,10 +39,9 @@ export const SideMenuLayout = (props) => {
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div className={styles.logo} />
       <Menu theme='dark' defaultSelectedKeys={[route.asPath]} mode='inline'>
-        {sideMenuData.map(data => {
+        {sideMenuData && sideMenuData.map(data => {
           const { title, route, subMenu } = data
 
-          console.log('data', data)
           if (subMenu) {
             return <SubMenu key={route[0]} icon={mapNameToIcon(title)} title={title}>
               {subMenu.map(subData =>

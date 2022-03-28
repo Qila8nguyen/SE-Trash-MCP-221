@@ -21,7 +21,7 @@ const MainLayout = (props) => {
   }
 
   return <Layout style={{ minHeight: '100vh' }}>
-    <SideMenuLayout sideMenuData={sideMenuData} collapsed={collapsed} />
+    <SideMenuLayout collapsed={collapsed} />
     <Layout className={styles['site-layout']}>
       <HeaderLayout
         setCollapsed={setCollapsed}
