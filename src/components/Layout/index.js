@@ -16,12 +16,12 @@ const MainLayout = (props) => {
 
   if (status !== AUTH.STATUS.AUTHENTICATED) {
     return <Spin spinning={status === AUTH.STATUS.LOADING} className='center'>
-      <Login/>
+      <Login />
     </Spin>
   }
 
-  return <Layout style = {{ minHeight:'100vh' }}>
-    <SideMenuLayout user={user} collapsed={collapsed}/>
+  return <Layout style={{ minHeight: '100vh' }}>
+    <SideMenuLayout user={user} collapsed={collapsed} layout={props.layout} />
     <Layout className={styles['site-layout']}>
       <HeaderLayout
         setCollapsed={setCollapsed}

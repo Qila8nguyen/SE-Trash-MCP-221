@@ -9,7 +9,6 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        console.log('rererere', session)
         const user = await User.find({ email: session.user.email })
         res.status(200).json({ success: true, data: { user } })
       } catch (error) {

@@ -18,12 +18,18 @@ export const SideMenuLayout = (props) => {
   const { collapsed } = props
   // Side menu data structure here
   const { data, error } = useSWR('/api/userInfo', fetcher)
-
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div className={styles.logo} />
       <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
-        <Menu.Item key='1' icon={<PieChartOutlined />}>
+        {props.layout.rights.map((right) => (
+          <Menu.Item key={right.route} icon={<PieChartOutlined />}>
+            <Link href={right.route}>
+              {right.title}
+            </Link>
+          </Menu.Item>
+        ))}
+        {/* <Menu.Item key='1' icon={<PieChartOutlined />}>
           <Link href={ROUTE.DASHBOARD.URL}>
             {ROUTE.DASHBOARD.TITLE}
           </Link>
@@ -44,7 +50,7 @@ export const SideMenuLayout = (props) => {
               {`${ROUTE.CE.VOLUME.TITLE} (9)`}
             </Link>
           </Menu.Item>
-        </SubMenu>
+        </SubMenu> */}
       </Menu>
     </Sider>
   )
