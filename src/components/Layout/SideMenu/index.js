@@ -8,12 +8,14 @@ import {
 import styles from '../styles.module.scss'
 import Link from 'next/link'
 import { ROUTE } from '../../../configs/constant'
+import { useRouter } from 'next/router'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
 
 export const SideMenuLayout = (props) => {
   const { collapsed, sideMenuData } = props
+  const route = useRouter()
 
   const mapNameToIcon = (name) => {
     switch (name) {
@@ -31,14 +33,14 @@ export const SideMenuLayout = (props) => {
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div className={styles.logo} />
-      <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
+      <Menu theme='dark' defaultSelectedKeys={[route.asPath]} mode='inline'>
         {sideMenuData.map(data => {
           const { name, route } = data
 
           if (Array.isArray(route)) {
-            return <SubMenu key={name} icon={mapNameToIcon(name)} title={name}>
+            return <SubMenu key={route[0]} icon={mapNameToIcon(name)} title={name}>
               {route.map(subData =>
-                <Menu.Item key={subData.name}>
+                <Menu.Item key={subData.route}>
                   <Link href={subData.route}>
                     {`${subData.name}`}
                   </Link>
@@ -47,7 +49,7 @@ export const SideMenuLayout = (props) => {
             </SubMenu>
           }
 
-          return <Menu.Item key={name} icon={mapNameToIcon(name)}>
+          return <Menu.Item key={route} icon={mapNameToIcon(name)}>
             <Link href={route}>
               {name}
             </Link>
