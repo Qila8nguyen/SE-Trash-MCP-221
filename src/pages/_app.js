@@ -5,9 +5,9 @@ import { getSession, SessionProvider } from "next-auth/react"
 import Router from '../components/Router'
 
 function MyApp({ Component, pageProps, layout }) {
-  return <SessionProvider refetchInterval={0}>
+  return <SessionProvider session={pageProps?.session} refetchInterval={0}>
     <Router>
-      <MainLayout layout={layout}>
+      <MainLayout sideMenuData={layout}>
         <Component {...pageProps} />
       </MainLayout>
     </Router>

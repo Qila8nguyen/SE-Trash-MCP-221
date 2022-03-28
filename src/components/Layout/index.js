@@ -10,7 +10,7 @@ import Login from '../../pages/auth/login'
 const { Content, Footer } = Layout
 
 const MainLayout = (props) => {
-  const { children, user } = props
+  const { children, sideMenuData } = props
   const { status } = useSession()
   const [collapsed, setCollapsed] = useState(false)
 
@@ -21,7 +21,7 @@ const MainLayout = (props) => {
   }
 
   return <Layout style={{ minHeight: '100vh' }}>
-    <SideMenuLayout user={user} collapsed={collapsed} layout={props.layout} />
+    <SideMenuLayout sideMenuData={sideMenuData} collapsed={collapsed} />
     <Layout className={styles['site-layout']}>
       <HeaderLayout
         setCollapsed={setCollapsed}

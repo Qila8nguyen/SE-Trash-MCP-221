@@ -9,49 +9,54 @@ import styles from '../styles.module.scss'
 import Link from 'next/link'
 import { ROUTE } from '../../../configs/constant'
 import useSWR from 'swr'
+import { useRouter } from 'next/router'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export const SideMenuLayout = (props) => {
-  const { collapsed } = props
-  // Side menu data structure here
-  const { data, error } = useSWR('/api/userInfo', fetcher)
-  console.log('first', props.layout)
+  const { collapsed, sideMenuData } = props
+  const route = useRouter()
+
+  const mapNameToIcon = (name) => {
+    switch (name) {
+      case ROUTE.DASHBOARD.TITLE:
+        return <PieChartOutlined />
+      case ROUTE.USER.TITLE:
+        return <TeamOutlined />
+      case ROUTE.CE.TITLE:
+        return <DesktopOutlined />
+      default:
+        break
+    }
+  }
+
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div className={styles.logo} />
-      <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
-        {props.layout.rights.map((right) => (
-          <Menu.Item key={right.route} icon={<PieChartOutlined />}>
-            <Link href={right.route}>
-              {right.title}
+      <Menu theme='dark' defaultSelectedKeys={[route.asPath]} mode='inline'>
+        {sideMenuData.map(data => {
+          const { name, route } = data
+
+          if (Array.isArray(route)) {
+            return <SubMenu key={route[0]} icon={mapNameToIcon(name)} title={name}>
+              {route.map(subData =>
+                <Menu.Item key={subData.route}>
+                  <Link href={subData.route}>
+                    {`${subData.name}`}
+                  </Link>
+                </Menu.Item>
+              )}
+            </SubMenu>
+          }
+
+          return <Menu.Item key={route} icon={mapNameToIcon(name)}>
+            <Link href={route}>
+              {name}
             </Link>
           </Menu.Item>
-        ))}
-        {/* <Menu.Item key='1' icon={<PieChartOutlined />}>
-          <Link href={ROUTE.DASHBOARD.URL}>
-            {ROUTE.DASHBOARD.TITLE}
-          </Link>
-        </Menu.Item>
-        <Menu.Item key='2' icon={<TeamOutlined />}>
-          <Link href={ROUTE.USER.URL}>
-            {ROUTE.USER.TITLE}
-          </Link>
-        </Menu.Item>
-        <SubMenu key='sub1' icon={<DesktopOutlined />} title={ROUTE.CE.TITLE}>
-          <Menu.Item key='3'>
-            <Link href={ROUTE.CE.INSTANCE.URL}>
-              {`${ROUTE.CE.INSTANCE.TITLE} (10)`}
-            </Link>
-          </Menu.Item>
-          <Menu.Item key='4'>
-            <Link href={ROUTE.CE.VOLUME.URL}>
-              {`${ROUTE.CE.VOLUME.TITLE} (9)`}
-            </Link>
-          </Menu.Item>
-        </SubMenu> */}
+        })}
       </Menu>
     </Sider>
   )
