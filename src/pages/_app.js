@@ -5,6 +5,7 @@ import { getSession, SessionProvider } from "next-auth/react"
 import Router from '../components/Router'
 
 function MyApp({ Component, pageProps, layout }) {
+  console.log('first', layout)
   return <SessionProvider session={pageProps?.session} refetchInterval={0}>
     <Router>
       <MainLayout sideMenuData={layout}>
@@ -21,5 +22,5 @@ MyApp.getInitialProps = async (ctx) => {
   if (!session) return { layout: 'default' }
   const res = await fetch(`${process.env.BACK_END_HOST}/layout?email=${session.user.email}`)
   const json = await res.json()
-  return { layout: json }
+  return { layout: json.rights }
 }
