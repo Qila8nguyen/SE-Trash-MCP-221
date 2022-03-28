@@ -4,47 +4,23 @@ import React from 'react'
 import { getSession, SessionProvider } from "next-auth/react"
 import Router from '../components/Router'
 
-function MyApp({ Component, pageProps, data }) {
+function MyApp({ Component, pageProps, layout }) {
+  console.log('first', layout)
   return <SessionProvider session={pageProps?.session} refetchInterval={0}>
     <Router>
-      <MainLayout sideMenuData={data?.sideMenuData}>
+      <MainLayout sideMenuData={layout}>
         <Component {...pageProps} />
       </MainLayout>
     </Router>
   </SessionProvider>
 }
 
-MyApp.getInitialProps = async (context) => {
-  const sideMenuData = [
-    {
-      name: 'Dashboard',
-      route: '/dashboard'
-    },
-    {
-      name: 'Users',
-      route: '/users'
-    },
-    {
-      name: 'Compute Engine',
-      route: [
-        {
-          name: 'Instance',
-          route: '/ce/instance'
-        },
-        {
-          name: 'Volume',
-          route: '/ce/volume'
-        }
-      ]
-    }
-  ]
-
-  return {
-    data: {
-      sideMenuData,
-    }
-  }
-}
-
 export default MyApp
 
+MyApp.getInitialProps = async (ctx) => {
+  const session = await getSession(ctx)
+  if (!session) return { layout: 'default' }
+  const res = await fetch(`${process.env.BACK_END_HOST}/layout?email=${session.user.email}`)
+  const json = await res.json()
+  return { layout: json.rights }
+}

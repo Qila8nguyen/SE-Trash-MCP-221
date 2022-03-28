@@ -12,3 +12,5 @@ const Instance = () => {
 }
 
 export default Instance
+
+export const getServerSideProps = async () => {

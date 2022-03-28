@@ -4,6 +4,7 @@ import FacebookProvider from "next-auth/providers/facebook"
 import GithubProvider from "next-auth/providers/github"
 import TwitterProvider from "next-auth/providers/twitter"
 import Auth0Provider from "next-auth/providers/auth0"
+import KeycloakProvider from "next-auth/providers/keycloak"
 import { ROUTE } from "../../../configs/constant"
 // import AppleProvider from "next-auth/providers/apple"
 // import EmailProvider from "next-auth/providers/email"
@@ -51,6 +52,11 @@ export default NextAuth({
     //   clientSecret: process.env.AUTH0_SECRET,
     //   issuer: process.env.AUTH0_ISSUER,
     // }),
+    KeycloakProvider({
+      clientId: process.env.KEYCLOAK_ID,
+      clientSecret: process.env.KEYCLOAK_SECRET,
+      issuer: process.env.KEYCLOAK_ISSUER,
+    })
   ],
   theme: {
     colorScheme: "light",
@@ -76,5 +82,5 @@ export default NextAuth({
     error: ROUTE.LOGIN.ERROR_URL, // Error code passed in query string as ?error=
     verifyRequest: '/auth/verify-request', // (used for check email message)
     newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
-  }
+  },
 })

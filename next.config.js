@@ -6,4 +6,9 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = {
+  nextConfig,
+  env: {
+    MONGO_URI: "mongodb://tinmhh:6zAM!qYxTe@172.26.26.176:54605/tinmhh-2287250a"
+  }
+}
