@@ -18,6 +18,7 @@ export const SideMenuLayout = (props) => {
   const { collapsed } = props
   // Side menu data structure here
   const { data, error } = useSWR('/api/userInfo', fetcher)
+  console.log('first', props.layout)
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div className={styles.logo} />
