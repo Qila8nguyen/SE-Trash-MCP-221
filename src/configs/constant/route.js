@@ -7,6 +7,9 @@ export const ROUTE = {
     URL: '/auth/login',
     ERROR_URL: '/auth/login/error'
   },
+  LOGOUT: {
+    URL: '/auth/signout',
+  },
   REGISTER: {
     TITLE: 'Register',
     URL: '/register'

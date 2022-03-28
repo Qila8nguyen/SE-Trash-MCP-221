@@ -18,7 +18,7 @@ export const SideMenuLayout = (props) => {
   const { collapsed } = props
   const route = useRouter()
 
-  const { layoutData: sideMenuData } = useContext(AppContext)
+  const { sideMenuData } = useContext(AppContext)
 
   const mapNameToIcon = (name) => {
     switch (name) {

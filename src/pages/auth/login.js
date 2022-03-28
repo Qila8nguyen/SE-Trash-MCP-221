@@ -96,7 +96,7 @@ const Login = () => {
                 })
               }}>
                 Log in with {provider.name}&nbsp;
-                <Image style={{paddingBottom:3}} preview={false} width={20} alt='providerIcon' src={IMAGE[provider.id].src}/>
+                <Image style={{paddingBottom:3}} preview={false} width={20} alt='providerIcon' src={IMAGE[provider.id]?.src}/>
               </Button>
             ))}
           </Space>

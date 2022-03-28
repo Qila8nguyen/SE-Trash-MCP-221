@@ -7,15 +7,15 @@ import Router from '../components/Router'
 export const AppContext = createContext({})
 
 function MyApp({ Component, pageProps, layout }) {
-  const [layoutData, setLayoutData] = useState([])
+  const [sideMenuData, setSideMenuData] = useState([])
 
   useEffect(() => {
-    layout && setLayoutData(layout)
+    layout && setSideMenuData(layout)
   }, [layout])
 
   return <SessionProvider session={pageProps?.session} refetchInterval={0}>
     <Router>
-      <AppContext.Provider value={{ layoutData }}>
+      <AppContext.Provider value={{ sideMenuData }}>
         <MainLayout>
           <Component {...pageProps} />
         </MainLayout>
