@@ -13,19 +13,22 @@ function MyApp({ Component, pageProps, layout }) {
     layout && setLayoutData(layout)
   }, [layout])
 
-  return <AppContext.Provider value={{ layoutData }}><SessionProvider session={pageProps?.session} refetchInterval={0}>
+  return <SessionProvider session={pageProps?.session} refetchInterval={0}>
     <Router>
-      <MainLayout>
-        <Component {...pageProps} />
-      </MainLayout>
+      <AppContext.Provider value={{ layoutData }}>
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
+      </AppContext.Provider>
     </Router>
-  </SessionProvider></AppContext.Provider>
+  </SessionProvider>
 }
 
 export default MyApp
 
-const isServer = () => typeof window === 'undefined'
 MyApp.getInitialProps = async (ctx) => {
+  const isServer = () => typeof window === 'undefined'
+
   if (isServer()) {
     const session = await getSession(ctx)
     if (!session) return { layout: null }

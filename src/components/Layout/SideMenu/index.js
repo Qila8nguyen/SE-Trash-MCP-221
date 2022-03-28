@@ -8,13 +8,11 @@ import {
 import styles from '../styles.module.scss'
 import Link from 'next/link'
 import { ROUTE } from '../../../configs/constant'
-import useSWR from 'swr'
 import { useRouter } from 'next/router'
 import { AppContext } from '../../../pages/_app'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export const SideMenuLayout = (props) => {
   const { collapsed } = props
@@ -45,8 +43,8 @@ export const SideMenuLayout = (props) => {
           if (subMenu) {
             return <SubMenu key={route[0]} icon={mapNameToIcon(title)} title={title}>
               {subMenu.map(subData =>
-                <Menu.Item key={subData.route}>
-                  <Link href={subData.route}>
+                <Menu.Item key={`${route}${subData.route}`}>
+                  <Link href={`${route}${subData.route}`}>
                     {`${subData.title}`}
                   </Link>
                 </Menu.Item>
