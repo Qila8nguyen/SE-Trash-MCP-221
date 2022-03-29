@@ -31,7 +31,7 @@ MyApp.getInitialProps = async (ctx) => {
   const isServer = () => typeof window === 'undefined'
 
   if (isServer()) {
-    return getLayout(ctx)
+    return {layout: await getLayout(ctx)}
   }
   else {
     return { layout: null }

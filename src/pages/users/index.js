@@ -1,4 +1,4 @@
-import { Button, Card, Result, Table } from 'antd'
+import { Card, Table } from 'antd'
 import React from 'react'
 import Page404 from '../../components/Page/404'
 import { getLayout, isAccessAllowed } from '../../utils'
