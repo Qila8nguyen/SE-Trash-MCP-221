@@ -21,7 +21,7 @@ export const HeaderLayout = (props) => {
   }
 
   const userMenu = (
-    <Menu className={styles.menu}>
+    <Menu style={{ paddingTop: 10, paddingBottom: 10 }}>
       <Menu.Item
         key='1' icon={<LogoutOutlined />}
         onClick={() => {

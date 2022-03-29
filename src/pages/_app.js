@@ -3,6 +3,7 @@ import '../styles/globals.scss'
 import React, { useEffect, useState, createContext } from 'react'
 import { getSession, SessionProvider } from "next-auth/react"
 import Router from '../components/Router'
+import getLayout from '../utils/preProcess'
 
 export const AppContext = createContext({})
 
@@ -30,11 +31,7 @@ MyApp.getInitialProps = async (ctx) => {
   const isServer = () => typeof window === 'undefined'
 
   if (isServer()) {
-    const session = await getSession(ctx)
-    if (!session) return { layout: null }
-    const res = await fetch(`${process.env.BACK_END_HOST}/layout?email=${session.user.email}`)
-    const json = res ? await res.json() : {}
-    return { layout: json.rights }
+    return getLayout(ctx)
   }
   else {
     return { layout: null }
