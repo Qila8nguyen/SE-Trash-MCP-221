@@ -33,7 +33,7 @@ MyApp.getInitialProps = async (ctx) => {
     const session = await getSession(ctx)
     if (!session) return { layout: null }
     const res = await fetch(`${process.env.BACK_END_HOST}/layout?email=${session.user.email}`)
-    const json = await res.json()
+    const json = res ? await res.json() : {}
     return { layout: json.rights }
   }
   else {

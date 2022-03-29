@@ -1,0 +1,31 @@
+.trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.avatar {
+  border-radius: 25px;
+  margin-top: -3px;
+  margin-left: -10px;
+}
+
+.user-button {
+  font-weight: 700;
+  padding-left: 8;
+}
+
+.header-row {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  padding: 0 10px;
+}

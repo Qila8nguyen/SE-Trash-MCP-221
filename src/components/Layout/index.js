@@ -10,7 +10,7 @@ import Login from '../../pages/auth/login'
 const { Content, Footer } = Layout
 
 const MainLayout = (props) => {
-  const { children, sideMenuData } = props
+  const { children } = props
   const { status } = useSession()
   const [collapsed, setCollapsed] = useState(false)
 
@@ -20,21 +20,19 @@ const MainLayout = (props) => {
     </Spin>
   }
 
-  return <Layout style={{ minHeight: '100vh' }}>
+  return <Layout className={styles['site-layout']}>
     <SideMenuLayout collapsed={collapsed} />
-    <Layout className={styles['site-layout']}>
+    <Layout className={styles['child-site-layout']}>
       <HeaderLayout
         setCollapsed={setCollapsed}
         collapsed={collapsed}
       />
-      <Content
-        style={{ margin: '0 16px' }}
-      >
+      <Content className={styles['content-layout']}>
         <div style={{ padding: 24 }}>
           {children}
         </div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>Admin template ©2022 Created by KhaPK</Footer>
+      <Footer className={styles['footer-layout']}>Admin template ©2022 Created by KhaPK</Footer>
     </Layout>
   </Layout>
 }
