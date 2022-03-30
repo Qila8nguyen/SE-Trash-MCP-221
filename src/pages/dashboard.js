@@ -10,56 +10,54 @@ const Dashboard = (props) => {
   const { data: session } = useSession();
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        animation: 'slide-in 0.5s',
-      }}
-    >
-      <div style={{width: '70%', marginRight: '30px'}}>
-        <Title>Welcome back, {session?.user.name}</Title>
-        <InfoCard />
+    <>
+      <Title>Welcome back, {session?.user.name}</Title>
 
-        <Row style={{ justifyContent: "space-between" }}>
-          <Card
-            title="Platform Overview"
-            style={{ marginTop: 20, width: "70%", height: 200 }}
-          ></Card>
-          <Card
-            title="New Registered Users by Division"
-            style={{ marginTop: 20, width: "28%", height: 200 }}
-          ></Card>
-        </Row>
+      <Row gutter={[20,20]}>
+        <Col span={17} /*style={{ width: "70%", marginRight: "30px" }} */>
+          <Row style={{ justifyContent: "space-between" }}>
+            <Card
+              title="Platform Overview"
+              style={{ marginTop: 20, width: "70%", height: 200 }}
+            ></Card>
+            <Card
+              title="New Registered Users by Division"
+              style={{ marginTop: 20, width: "28%", height: 200 }}
+            ></Card>
+          </Row>
 
-        <Row style={{ justifyContent: "space-between" }}>
-          <Card
-            title="New Registered Users by Division"
-            style={{ marginTop: 20, width: "28%", height: 200 }}
-          ></Card>
-          <Card
-            title="Platform Overview"
-            style={{ marginTop: 20, width: "70%", height: 200 }}
-          ></Card>
-        </Row>
+          <Row style={{ justifyContent: "space-between" }}>
+            <Card
+              title="New Registered Users by Division"
+              style={{ marginTop: 20, width: "28%", height: 200 }}
+            ></Card>
+            <Card
+              title="Platform Overview"
+              style={{ marginTop: 20, width: "70%", height: 200 }}
+            ></Card>
+          </Row>
 
-        <Row style={{ justifyContent: "space-between" }}>
-          <Card
-            title="New Registered Users by Division"
-            style={{ marginTop: 20, width: "100%", height: 200 }}
-          ></Card>
-        </Row>
+          <Row style={{ justifyContent: "space-between" }}>
+            <Card
+              title="New Registered Users by Division"
+              style={{ marginTop: 20, width: "100%", height: 200 }}
+            ></Card>
+          </Row>
 
-        <Row style={{ justifyContent: "space-between" }}>
-          <Card
-            title="New Registered Users by Division"
-            style={{ marginTop: 20, width: "100%", height: 200 }}
-          ></Card>
+          <Row style={{ justifyContent: "space-between" }}>
+            <Card
+              title="New Registered Users by Division"
+              style={{ marginTop: 20, width: "100%", height: 200 }}
+            ></Card>
+          </Row>
+        </Col>
+
+        <Col span={7} style={{marginTop: '20px'}}>
+          <RightCardDetail />
+        </Col>
+
         </Row>
-      </div>
-      <RightCardDetail />
-    </div>
+    </>
   );
 };
 

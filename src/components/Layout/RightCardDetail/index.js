@@ -7,14 +7,12 @@ import { Card } from "antd";
 // title, amount, color = '#C8FACD', className, style, valueColor
 const RightCardDetail = () => {
   return (
-    <div className={styles["right-card"]} >
       <Card
         title="Right Card Details"
-        style={{ marginBottom: 20, height: '100%'}}
+        style={{ height: '100%'}}
       >
         <CircularProgressCard />
       </Card>
-    </div>
   );
 };
 
