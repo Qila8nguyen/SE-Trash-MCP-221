@@ -6,7 +6,7 @@ import Router from '../components/Router'
 
 export const AppContext = createContext({})
 
-function MyApp({ Component, pageProps, layout }) {
+function MyApp({ Component, pageProps, layout, session }) {
   const [sideMenuData, setSideMenuData] = useState([])
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps, layout }) {
   return <SessionProvider session={pageProps?.session} refetchInterval={0}>
     <Router>
       <AppContext.Provider value={{ sideMenuData }}>
-        <MainLayout>
+        <MainLayout session={session}> 
           <Component {...pageProps} />
         </MainLayout>
       </AppContext.Provider>
@@ -31,12 +31,13 @@ MyApp.getInitialProps = async (ctx) => {
 
   if (isServer()) {
     const session = await getSession(ctx)
-    if (!session) return { layout: null }
+    if (!session) return { layout: null, session: null }
+    console.log("session = ", session);
     const res = await fetch(`${process.env.BACK_END_HOST}/layout?email=${session.user.email}`)
     const json = await res.json()
-    return { layout: json.rights }
+    return { layout: json.rights, session}
   }
   else {
-    return { layout: null }
+    return { layout: null, session: null }
   }
 }

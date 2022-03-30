@@ -8,6 +8,7 @@ import RightCardDetail from "../components/Layout/RightCardDetail";
 const { Title } = Typography;
 const Dashboard = (props) => {
   const { data: session } = useSession();
+  console.log()
 
   return (
     <>

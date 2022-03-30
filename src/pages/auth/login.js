@@ -35,8 +35,9 @@ const Login = () => {
     router.prefetch(ROUTE.DASHBOARD.URL)
   }, [])
 
-  if (status === AUTH.STATUS.AUTHENTICATED) return <Spin className='center'/>
-
+  if (status === AUTH.STATUS.AUTHENTICATED) {
+    return <Spin className='center'/>
+  }
   return (
     <div className='login-page'>
       <div className='login-box'>

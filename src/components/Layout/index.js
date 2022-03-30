@@ -6,16 +6,16 @@ import SideMenuLayout from './SideMenu'
 import { useSession } from 'next-auth/react'
 import { AUTH } from '../../configs/constant'
 import Login from '../../pages/auth/login'
-import RightCardDetail from './RightCardDetail'
 
 const { Content, Footer } = Layout
 
 const MainLayout = (props) => {
-  const { children, sideMenuData } = props
+  const { children, session } = props
   const { status } = useSession()
   const [collapsed, setCollapsed] = useState(false)
+  console.log('status', status);
 
-  if (status !== AUTH.STATUS.AUTHENTICATED) {
+  if (!session) {
     return <Spin spinning={status === AUTH.STATUS.LOADING} className='center'>
       <Login />
     </Spin>
