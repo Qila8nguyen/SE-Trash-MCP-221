@@ -15,7 +15,7 @@ const Dashboard = (props) => {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-evenly",
-        animation: 'slide-in 1s',
+        animation: 'slide-in 0.5s',
       }}
     >
       <div style={{width: '70%', marginRight: '30px'}}>

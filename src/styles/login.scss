@@ -87,14 +87,14 @@
 
 @keyframes slide-in {
   from {
-    margin-left: 100%;
+    margin-left: 50%;
     width: 300%;
   }
 
-  70% {
-    margin-left: 90%;
-    width: 150%;
-  }
+  // 50% {
+  //   margin-left: 20%;
+  //   width: 150%;
+  // }
 
   to {
     margin-left: 0%;
