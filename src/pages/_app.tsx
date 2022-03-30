@@ -3,35 +3,28 @@ import '../styles/globals.scss'
 import React, { useEffect, useState, createContext } from 'react'
 import { getSession, SessionProvider } from "next-auth/react"
 import Router from '../components/Router'
+import { store, wrapper } from '../redux/store'
+import { Provider } from 'react-redux'
 
 export const AppContext = createContext({})
 
-function MyApp({ Component, pageProps, session }) {
-  const layout = pageProps?.layout
+function MyApp({ Component, pageProps }) {
+  const { session } = pageProps
 
-  const [sideMenuData, setSideMenuData] = useState([])
-
-  useEffect(() => {
-    layout && setSideMenuData(layout)
-  }, [layout])
-
-  return <SessionProvider refetchInterval={0}>
-    <Router>
-      <AppContext.Provider value={{ sideMenuData }}>
-        {session ?
-          <MainLayout>
+  return (
+    <Provider store={store}>
+      <SessionProvider refetchInterval={0}>
+        <Router>
+          {session ?
+            <MainLayout>
+              <Component {...pageProps} />
+            </MainLayout> :
             <Component {...pageProps} />
-          </MainLayout> :
-          <Component {...pageProps} />
-        }
-      </AppContext.Provider>
-    </Router>
-  </SessionProvider>
+          }
+        </Router>
+      </SessionProvider>
+    </Provider>
+  )
 }
 
-export default MyApp
-
-MyApp.getInitialProps = async (ctx) => {
-  const session = await getSession(ctx)
-  return { session }
-}
+export default wrapper.withRedux(MyApp)
