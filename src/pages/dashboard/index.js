@@ -1,11 +1,16 @@
-import { Card, Col, Row, Space } from 'antd'
+import { Card, Row } from 'antd'
 import Typography from 'antd/lib/typography'
 import { useSession } from 'next-auth/react'
 import React from 'react'
-import { InfoCard } from '../components/Dashboard'
+import { InfoCard } from '../../components/Dashboard'
+import Page404 from '../../components/Page/404'
+import { getLayout, isAccessAllowed } from '../../utils'
 
 const { Title } = Typography
 const Dashboard = (props) => {
+  const { isAllowed } = props
+  if (!isAllowed) return <Page404/>
+
   const { data: session } = useSession()
 
   return (
@@ -50,3 +55,10 @@ const Dashboard = (props) => {
 }
 
 export default Dashboard
+
+export const getServerSideProps = async (context) => {
+  const layout = await getLayout(context)
+  const isAllowed = await isAccessAllowed(layout, context)
+
+  return { props: {isAllowed, layout} }
+}

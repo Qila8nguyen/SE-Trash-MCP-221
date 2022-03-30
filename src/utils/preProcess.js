@@ -11,16 +11,21 @@ export const getLayout = async (ctx) => {
   return json.rights
 }
 
-export const isAccessAllowed = async (layout = [], url) => {
-  console.log('url :>> ', url)
-  if (!layout.length) return false
+export const isAccessAllowed = async (layout = [], context, isSlugPage = false) => {
+  const { resolvedUrl } = context                 // ex: '/a/[slug]?c=asd'
+  if (!(layout && layout.length) || !resolvedUrl) return false
+
+  const removedQueries = resolvedUrl.split('?')   // ['/a/b' , 'c=asd']
+  let routes = removedQueries[0].split(/(\/)/)    // ['', '/', 'a', '/', 'b']
+  if (isSlugPage) routes.splice(-2)               // ['', '/', 'a']
+  const url =  routes.join('')                    // ex_result: '/a'
 
   for (const item of layout) {
     const { route, subMenu } = item
-    console.log('route :>> ', route);
     if (subMenu) {
       for (const i of subMenu) {
-        if (`${route}${i.route}` === url) return true
+        const subRoute = `${route}${i.route}`
+        if (subRoute === url) return true
       }
     }
     else if (route === url) return true
@@ -28,5 +33,3 @@ export const isAccessAllowed = async (layout = [], url) => {
 
   return false
 }
-
-export default getLayout
