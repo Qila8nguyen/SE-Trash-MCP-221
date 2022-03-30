@@ -29,11 +29,10 @@ const MainLayout = (props) => {
         collapsed={collapsed}
       />
       <Content
-        style={{ margin: '0 16px' }}
+        style={{ margin: '0 16px' }} 
       >
         <div style={{ padding: 24 }}>
           {children}
-          <RightCardDetail />
         </div>
         
       </Content>

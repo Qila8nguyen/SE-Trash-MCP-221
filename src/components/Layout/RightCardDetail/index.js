@@ -1,14 +1,21 @@
-import React from 'react'
-import { InfoCardItem } from '../../Dashboard'
-import SemiCircularProgressCard from '../../Dashboard/ProgressCard'
+import React from "react";
+import { InfoCardItem } from "../../Dashboard";
+import SemiCircularProgressCard from "../../Dashboard/ProgressCard";
+import styles from "./styles.module.scss";
+import { Card } from "antd";
 
 // title, amount, color = '#C8FACD', className, style, valueColor
 const RightCardDetail = () => {
   return (
-    <InfoCardItem title='RightSideCard' color='white' valueColor='black' aamount={30}>
-      <SemiCircularProgressCard />
-    </InfoCardItem>
-  )
-}
+    <div className={styles["right-card"]}>
+      <Card
+        title="Right Card Details"
+        style={{ marginBottom: 20, height: '100%' }}
+      >
+        <SemiCircularProgressCard />
+      </Card>
+    </div>
+  );
+};
 
-export default RightCardDetail
+export default RightCardDetail;
