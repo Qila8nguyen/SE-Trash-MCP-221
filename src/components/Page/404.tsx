@@ -1,6 +1,10 @@
 import { Result } from "antd"
 
-const Page404 = (props) => {
+type Props = {
+
+}
+
+const Page404 = (props: Props) => {
   return <Result
     status="404"
     title="404"

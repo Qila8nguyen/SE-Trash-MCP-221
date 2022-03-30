@@ -1,24 +1,25 @@
 import Text from 'antd/lib/typography/Text'
+import { GetServerSideProps } from 'next'
 import React from 'react'
 import Page404 from '../../components/Page/404'
 import { getLayout, isAccessAllowed } from '../../utils'
 
-const Instance = (props) => {
+const Volume = (props) => {
   const { isAllowed } = props
   if (!isAllowed) return <Page404/>
 
   return (
     <div>
       <Text>
-        Instance
+        Volume
       </Text>
     </div>
   )
 }
 
-export default Instance
+export default Volume
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps : GetServerSideProps = async (context) => {
   const layout = await getLayout(context)
   const isAllowed = await isAccessAllowed(layout, context)
 

@@ -1,5 +1,6 @@
 import { Card, Row } from 'antd'
 import Typography from 'antd/lib/typography'
+import { GetServerSideProps } from 'next'
 import { useSession } from 'next-auth/react'
 import React from 'react'
 import { InfoCard } from '../../components/Dashboard'
@@ -56,7 +57,7 @@ const Dashboard = (props) => {
 
 export default Dashboard
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps : GetServerSideProps = async (context) => {
   const layout = await getLayout(context)
   const isAllowed = await isAccessAllowed(layout, context)
 

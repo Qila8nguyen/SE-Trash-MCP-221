@@ -1,6 +1,8 @@
+import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/react'
+import { Layout } from '../interfaces'
 
-export const getLayout = async (ctx) => {
+export const getLayout = async (ctx : GetServerSidePropsContext) => {
   const session = await getSession(ctx)
 
   if (!session) return null
@@ -11,9 +13,8 @@ export const getLayout = async (ctx) => {
   return json.rights
 }
 
-export const isAccessAllowed = async (layout = [], context, isSlugPage = false) => {
+export const isAccessAllowed = async (layout : Layout, context : GetServerSidePropsContext, isSlugPage? : boolean) => {
   const { resolvedUrl } = context                 // ex: '/a/[slug]?c=asd'
-  if (!(layout && layout.length) || !resolvedUrl) return false
 
   const removedQueries = resolvedUrl.split('?')   // ['/a/b' , 'c=asd']
   let routes = removedQueries[0].split(/(\/)/)    // ['', '/', 'a', '/', 'b']

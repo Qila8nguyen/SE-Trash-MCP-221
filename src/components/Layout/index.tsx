@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
-import { Layout, Spin } from 'antd'
+import { Layout } from 'antd'
 import styles from './styles.module.scss'
 import HeaderLayout from './Header'
 import SideMenuLayout from './SideMenu'
-import { useSession } from 'next-auth/react'
-import { AUTH } from '../../configs/constant'
-import Login from '../../pages/auth/login'
 
 const { Content, Footer } = Layout
 
-const MainLayout = (props) => {
-  const { children } = props
+const MainLayout = ({ children } : { children: React.ReactNode }) => {
   const [collapsed, setCollapsed] = useState(false)
 
   return <Layout className={styles['site-layout']}>

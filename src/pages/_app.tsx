@@ -3,7 +3,6 @@ import '../styles/globals.scss'
 import React, { useEffect, useState, createContext } from 'react'
 import { getSession, SessionProvider } from "next-auth/react"
 import Router from '../components/Router'
-import { getLayout } from '../utils'
 
 export const AppContext = createContext({})
 
@@ -20,7 +19,7 @@ function MyApp({ Component, pageProps, session }) {
     <Router>
       <AppContext.Provider value={{ sideMenuData }}>
         {session ?
-          <MainLayout session={session}>
+          <MainLayout>
             <Component {...pageProps} />
           </MainLayout> :
           <Component {...pageProps} />
