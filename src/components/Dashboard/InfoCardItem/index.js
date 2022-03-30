@@ -2,8 +2,9 @@ import { Statistic } from 'antd'
 import React from 'react'
 import styles from './styles.module.scss'
 
+
 export const InfoCardItem = (props) => {
-  const { title, amount, color = '#C8FACD', className, style, valueColor} = props
+  const { children, title, amount, color = '#C8FACD', className, style, valueColor} = props
 
   return (
     <div className={className} style={{ ...style, backgroundColor: color}}>
@@ -13,7 +14,8 @@ export const InfoCardItem = (props) => {
         className={styles.center}
         title={title}
         value={amount}
-      />
+      /> 
+      {children}
     </div>
   )
 }

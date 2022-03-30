@@ -6,6 +6,7 @@ import SideMenuLayout from './SideMenu'
 import { useSession } from 'next-auth/react'
 import { AUTH } from '../../configs/constant'
 import Login from '../../pages/auth/login'
+import RightCardDetail from './RightCardDetail'
 
 const { Content, Footer } = Layout
 
@@ -32,8 +33,11 @@ const MainLayout = (props) => {
       >
         <div style={{ padding: 24 }}>
           {children}
+          <RightCardDetail />
         </div>
+        
       </Content>
+      
       <Footer style={{ textAlign: 'center' }}>Admin template ©2022 Created by KhaPK</Footer>
     </Layout>
   </Layout>
