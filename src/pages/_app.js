@@ -7,7 +7,9 @@ import { getLayout } from '../utils'
 
 export const AppContext = createContext({})
 
-function MyApp({ Component, pageProps, layout, session }) {
+function MyApp({ Component, pageProps, session }) {
+  const { layout } = pageProps
+
   const [sideMenuData, setSideMenuData] = useState([])
 
   useEffect(() => {
@@ -31,12 +33,6 @@ function MyApp({ Component, pageProps, layout, session }) {
 export default MyApp
 
 MyApp.getInitialProps = async (ctx) => {
-  const isServer = () => typeof window === 'undefined'
   const session = await getSession(ctx)
-  if (isServer()) {
-    return {layout: await getLayout(ctx), session}
-  }
-  else {
-    return { layout: null, session }
-  }
+  return { session }
 }
