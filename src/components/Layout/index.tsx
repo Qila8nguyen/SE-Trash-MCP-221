@@ -1,24 +1,13 @@
 import React, { useState } from 'react'
-import { Layout, Spin } from 'antd'
+import { Layout } from 'antd'
 import styles from './styles.module.scss'
 import HeaderLayout from './Header'
 import SideMenuLayout from './SideMenu'
-import { useSession } from 'next-auth/react'
-import { AUTH } from '../../configs/constant'
-import Login from '../../pages/auth/login'
 
 const { Content, Footer } = Layout
 
-const MainLayout = (props) => {
-  const { children } = props
-  const { status } = useSession()
+const MainLayout = ({ children } : { children: React.ReactNode }) => {
   const [collapsed, setCollapsed] = useState(false)
-
-  // if (!props.session) {
-  //   return <Spin spinning={status === AUTH.STATUS.LOADING} className='center'>
-  //     <Login />
-  //   </Spin>
-  // }
 
   return <Layout className={styles['site-layout']}>
     <SideMenuLayout collapsed={collapsed} />

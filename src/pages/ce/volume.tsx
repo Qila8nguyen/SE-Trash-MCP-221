@@ -1,27 +1,27 @@
-import { Card, Table } from 'antd'
+import Text from 'antd/lib/typography/Text'
+import { GetServerSideProps } from 'next'
 import React from 'react'
 import Page404 from '../../components/Page/404'
 import { getLayout, isAccessAllowed } from '../../utils'
 
-const Users = (props) => {
+const Volume = (props) => {
   const { isAllowed } = props
-  console.log('props :>> ', props)
   if (!isAllowed) return <Page404/>
 
   return (
     <div>
-      <Card title='Users (100)'>
-        <Table pagination/>
-      </Card>
+      <Text>
+        Volume
+      </Text>
     </div>
   )
 }
 
-export default Users
+export default Volume
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps : GetServerSideProps = async (context) => {
   const layout = await getLayout(context)
-  const isAllowed = await isAccessAllowed(layout, context.resolvedUrl)
+  const isAllowed = await isAccessAllowed(layout, context)
 
   return { props: {isAllowed, layout} }
 }
