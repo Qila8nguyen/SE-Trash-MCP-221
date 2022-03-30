@@ -8,7 +8,7 @@ import { getLayout } from '../utils'
 export const AppContext = createContext({})
 
 function MyApp({ Component, pageProps, session }) {
-  const { layout } = pageProps
+  const layout = pageProps?.layout
 
   const [sideMenuData, setSideMenuData] = useState([])
 
