@@ -14,11 +14,11 @@ const MainLayout = (props) => {
   const { status } = useSession()
   const [collapsed, setCollapsed] = useState(false)
 
-  if (status !== AUTH.STATUS.AUTHENTICATED) {
-    return <Spin spinning={status === AUTH.STATUS.LOADING} className='center'>
-      <Login />
-    </Spin>
-  }
+  // if (!props.session) {
+  //   return <Spin spinning={status === AUTH.STATUS.LOADING} className='center'>
+  //     <Login />
+  //   </Spin>
+  // }
 
   return <Layout className={styles['site-layout']}>
     <SideMenuLayout collapsed={collapsed} />
