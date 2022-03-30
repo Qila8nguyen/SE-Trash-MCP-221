@@ -10,6 +10,8 @@ import Link from 'next/link'
 import { ROUTE } from '../../../configs/constant'
 import { useRouter } from 'next/router'
 import { AppContext } from '../../../pages/_app'
+import { useAppSelector } from '../../../redux/hooks'
+import { useSelector } from 'react-redux'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
@@ -18,7 +20,7 @@ export const SideMenuLayout = (props) => {
   const { collapsed } = props
   const route = useRouter()
 
-  const { sideMenuData } : any = useContext(AppContext)
+  const sideMenuData = useAppSelector(state => state.layout.data)
 
   const mapNameToIcon = (name) => {
     switch (name) {

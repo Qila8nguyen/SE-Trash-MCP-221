@@ -1,4 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 import { AppError } from "../types";
 import { fetchLayout } from "./actions";
 
@@ -28,5 +29,11 @@ export const layoutReducer = createReducer(initialState, (builder) => {
 		.addCase(fetchLayout.rejected, (state, action) => {
 			state.loading = false;
 			state.error = action.payload.error;
-		});
+		})
+    .addCase(HYDRATE, (state, action) => {
+      return {
+        ...state,
+        ...action.payload.layout,
+      }
+    });
 });
