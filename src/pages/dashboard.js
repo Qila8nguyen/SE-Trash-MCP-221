@@ -53,7 +53,7 @@ const Dashboard = (props) => {
           </Row>
         </Col>
 
-        <Col span={7} style={{marginTop: '20px'}}>
+        <Col style={{marginTop: '20px'}}>
           <RightCardDetail />
         </Col>
 

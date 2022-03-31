@@ -6,7 +6,7 @@ import CenterParagraph from "../CenterParagraph";
 const CircularProgressCard = (props) => {
   const percent = (props.satistic / props.max) * 100;
   return (
-    <div style={{marginLeft: '50%', transform: 'translateX(-50%)'}}>
+    <div  /* style={{marginLeft: '50%', transform: 'translateX(-50%)'}}  */>
       <Progress
         className={styles.outer}
         strokeColor={{
