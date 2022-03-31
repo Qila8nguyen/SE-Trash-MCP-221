@@ -14,11 +14,17 @@ import { useAppSelector } from '../../../redux/hooks'
 const { Sider } = Layout
 const { SubMenu } = Menu
 
+export type Path = {
+  route: string,
+  title: string
+}
+
 export const SideMenuLayout = (props) => {
   const { collapsed } = props
   const route = useRouter()
 
-  const sideMenuData = useAppSelector(state => state.layout.data)
+  const sideMenuData = useAppSelector(state => state.layout.layout);
+  console.log(sideMenuData);
 
   const mapNameToIcon = (name) => {
     switch (name) {
@@ -38,7 +44,7 @@ export const SideMenuLayout = (props) => {
       <div className={styles.logo} />
       <Menu theme='dark' defaultSelectedKeys={[route.asPath]} mode='inline'>
         {sideMenuData && sideMenuData.map(data => {
-          const { title, route, subMenu } = data
+          const { title, route, subMenu } : {subMenu: Path[], title: string, route: string} = data
 
           if (subMenu) {
             return <SubMenu key={route[0]} icon={mapNameToIcon(title)} title={title}>

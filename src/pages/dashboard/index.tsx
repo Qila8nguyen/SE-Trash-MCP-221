@@ -12,10 +12,12 @@ import { getPreProcessProps } from '../../utils'
 // import { InfoCard } from '../../components/Dashboard'
 import { wrapper } from '../../redux/store'
 import { GetServerSideProps } from 'next'
+import { useAppSelector } from '../../redux/hooks'
 
 
 const { Title } = Typography
 const Dashboard = (props) => {
+
   const { isAllowed, session } = props
   if (!isAllowed) return <Page404 />
 
