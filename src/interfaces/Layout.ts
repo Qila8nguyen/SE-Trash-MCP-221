@@ -12,3 +12,9 @@ type LayoutObj = {
 }
 
 export type Layout = Array<LayoutObj>
+
+export type LayoutState = {
+	pending: boolean,
+	error: boolean,
+	layout: [],
+}

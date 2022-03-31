@@ -1,12 +1,12 @@
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/react'
 import { Layout } from '../interfaces'
-import { fetchLayout } from '../redux/layout'
+import { fetchUserFromMongo } from '../redux/layout'
 
 export const getLayout = async (session, store) => {
   if (!session) return
 
-  await store.dispatch(fetchLayout({ email: session.user.email }))
+  await store.dispatch(fetchUserFromMongo({ email: session.user.email }))
 }
 
 export const isAccessAllowed = async (layout: Layout, context: GetServerSidePropsContext, isSlugPage?: boolean) => {
