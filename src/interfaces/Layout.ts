@@ -1,16 +1,16 @@
 import { AppError } from "../redux/types"
 
-type SubMenuObj = {
-  route: string,
-  title: string
-}
+// type SubMenuObj = {
+//   route: string,
+//   title: string
+// }
 
-type SubMenu = [SubMenuObj]
+// type SubMenu = [SubMenuObj]
 
-type LayoutObj = {
+export type LayoutObj = {
   title: string,
   route: string,
-  subMenu?: SubMenu
+  subMenu?: Layout
 }
 
 export type Layout = Array<LayoutObj>
