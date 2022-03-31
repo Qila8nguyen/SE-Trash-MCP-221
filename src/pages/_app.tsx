@@ -3,6 +3,7 @@ import '../styles/globals.scss'
 import React, { useEffect, useState, createContext } from 'react'
 import { getSession, SessionProvider } from "next-auth/react"
 import Router from '../components/Router'
+import WrapperStatistic from 'antd/lib/statistic/Statistic'
 
 export const AppContext = createContext({})
 
@@ -17,14 +18,14 @@ function MyApp({ Component, pageProps, session }) {
 
   return <SessionProvider refetchInterval={0}>
     <Router>
-      <AppContext.Provider value={{ sideMenuData }}>
-        {session ?
+      {/* <AppContext.Provider value={{ sideMenuData }}>
+        {session ? */}
           <MainLayout>
             <Component {...pageProps} />
           </MainLayout> :
           <Component {...pageProps} />
-        }
-      </AppContext.Provider>
+        
+      {/* </AppContext.Provider> */}
     </Router>
   </SessionProvider>
 }
