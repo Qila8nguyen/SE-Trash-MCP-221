@@ -8,7 +8,7 @@ type SubMenu = [SubMenuObj]
 type LayoutObj = {
   title: string,
   route: string,
-  subMenu? : SubMenu
+  subMenu?: SubMenu
 }
 
-export type Layout = [LayoutObj]
+export type Layout = Array<LayoutObj>

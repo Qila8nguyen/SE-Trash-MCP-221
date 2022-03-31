@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LayoutState } from "./store";
+import { LayoutState } from "../store";
 
 export const fetchUserFromMongo = createAsyncThunk<LayoutState, { email: String }>(
   "layout: ",

@@ -1,6 +1,6 @@
 import { createReducer} from '@reduxjs/toolkit';
 import { fetchUserFromMongo } from '.';
-import { LayoutState } from './store';
+import { LayoutState } from '../store';
 import {createWrapper, Context, HYDRATE} from 'next-redux-wrapper';
 
 

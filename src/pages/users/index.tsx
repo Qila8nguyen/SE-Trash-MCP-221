@@ -4,7 +4,8 @@ import Link from 'next/link'
 import React from 'react'
 import Page404 from '../../components/Page/404'
 import { ROUTE } from '../../configs/constant'
-import { getLayout, isAccessAllowed } from '../../utils'
+import { wrapper } from '../../redux/store'
+import { getPreProcessProps } from '../../utils'
 
 const Users = (props) => {
   const { isAllowed } = props
@@ -44,9 +45,12 @@ const Users = (props) => {
 
 export default Users
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const layout = await getLayout(context)
-  const isAllowed = await isAccessAllowed(layout, context)
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+  const preProcessProps = await getPreProcessProps(context, store)
 
-  return { props: {isAllowed, layout} }
-}
+  return {
+    props: {
+      ...preProcessProps
+    }
+  }
+})
