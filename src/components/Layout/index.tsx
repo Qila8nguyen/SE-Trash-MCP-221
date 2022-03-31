@@ -6,7 +6,7 @@ import SideMenuLayout from './SideMenu'
 
 const { Content, Footer } = Layout
 
-const MainLayout = ({ children } : { children: React.ReactNode }) => {
+const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const [collapsed, setCollapsed] = useState(false)
 
   return <Layout className={styles['site-layout']}>

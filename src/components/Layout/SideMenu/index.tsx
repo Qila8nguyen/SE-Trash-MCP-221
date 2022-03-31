@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Layout, Menu } from 'antd'
 import {
   DesktopOutlined,
@@ -9,9 +9,7 @@ import styles from './styles.module.scss'
 import Link from 'next/link'
 import { ROUTE } from '../../../configs/constant'
 import { useRouter } from 'next/router'
-import { AppContext } from '../../../pages/_app'
 import { useAppSelector } from '../../../redux/hooks'
-import { useSelector } from 'react-redux'
 
 const { Sider } = Layout
 const { SubMenu } = Menu

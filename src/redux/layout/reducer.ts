@@ -1,12 +1,13 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import { Layout } from "../../interfaces";
 import { AppError } from "../types";
 import { fetchLayout } from "./actions";
 
 type LayoutState = {
 	loading: boolean;
 	error: AppError;
-	data: [];
+	data: Layout;
 };
 
 const initialState: LayoutState = {

@@ -1,19 +1,15 @@
 import { GetServerSidePropsContext } from 'next'
 import { getSession } from 'next-auth/react'
 import { Layout } from '../interfaces'
+import { fetchLayout } from '../redux/layout'
 
-export const getLayout = async (ctx : GetServerSidePropsContext) => {
-  const session = await getSession(ctx)
+export const getLayout = async (session, store) => {
+  if (!session) return
 
-  if (!session) return null
-
-  const res = await fetch(`${process.env.BACK_END_HOST}/layout?email=${session.user.email}`)
-  const json = await res.json()
-
-  return json.rights
+  await store.dispatch(fetchLayout({ email: session.user.email }))
 }
 
-export const isAccessAllowed = async (layout : Layout, context : GetServerSidePropsContext, isSlugPage? : boolean) => {
+export const isAccessAllowed = async (layout: Layout, context: GetServerSidePropsContext, isSlugPage?: boolean) => {
   const { resolvedUrl } = context                 // ex: '/a/[slug]?c=asd'
 
   const removedQueries = resolvedUrl.split('?')   // ['/a/b' , 'c=asd']
@@ -34,3 +30,16 @@ export const isAccessAllowed = async (layout : Layout, context : GetServerSidePr
 
   return false
 }
+
+export const getPreProcessProps = async (context: GetServerSidePropsContext, store, isSlugPage?: boolean) => {
+  const session = await getSession(context)
+  if ( !session ) return { session: null, isAllowed: false}
+
+  await getLayout(session, store)
+  const layout = store.getState().layout.data
+  const isAllowed = await isAccessAllowed(layout, context, isSlugPage)
+
+  return { session, isAllowed }
+}
+
+export default getPreProcessProps
