@@ -1,3 +1,5 @@
+import { AppError } from "../redux/types"
+
 type SubMenuObj = {
   route: string,
   title: string
@@ -15,6 +17,6 @@ export type Layout = Array<LayoutObj>
 
 export type LayoutState = {
 	pending: boolean,
-	error: boolean,
+	error: AppError,
 	layout: [],
 }

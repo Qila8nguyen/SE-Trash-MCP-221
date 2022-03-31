@@ -2,10 +2,11 @@ import { createReducer} from '@reduxjs/toolkit';
 import { fetchUserFromMongo } from '.';
 import { LayoutState } from '../../interfaces';
 import {HYDRATE} from 'next-redux-wrapper';
+import { ActionType, AppError } from '../types';
 
 
 const initialState: LayoutState = {
-    error: false, 
+    error: AppError.NO_ERROR, 
     pending: false,
     layout: [],
 };
@@ -22,7 +23,7 @@ const layoutReducer = createReducer(initialState, builder => {
     })
     .addCase(fetchUserFromMongo.rejected, state => {
         state.pending = false;
-        state.error = true;
+        state.error = AppError.UNAUTHORIZED,
         state.layout = [];
     })
     .addCase(HYDRATE, (state) => {
