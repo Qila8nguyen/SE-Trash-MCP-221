@@ -2,12 +2,11 @@ import React from 'react'
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  UserOutlined,
   DownOutlined,
   LogoutOutlined
 } from '@ant-design/icons'
-import { Menu, Layout , Dropdown, Button, message, Row } from 'antd'
-import styles from '../styles.module.scss'
+import { Menu, Layout , Dropdown, Button, Row, Image } from 'antd'
+import styles from './styles.module.scss'
 import { signOut, useSession } from 'next-auth/react'
 import { ROUTE } from '../../../configs/constant'
 
@@ -22,9 +21,9 @@ export const HeaderLayout = (props) => {
   }
 
   const userMenu = (
-    <Menu style={{paddingTop: 10, paddingBottom: 10}}>
+    <Menu style={{ paddingTop: 10, paddingBottom: 10 }}>
       <Menu.Item
-        key="1" icon={<LogoutOutlined />}
+        key='1' icon={<LogoutOutlined />}
         onClick={() => {
           signOut({
             callbackUrl: `${window.location.origin}${ROUTE.LOGIN.URL}`
@@ -37,16 +36,24 @@ export const HeaderLayout = (props) => {
   )
 
   return (
-    <Header className={styles['site-layout-background']} style={{ padding: 0 }}>
-      <Row style={{ justifyContent: 'space-between', alignItems:'center' }}>
+    <Header>
+      <Row className={styles['header-row']}>
         {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
           className: styles.trigger,
           onClick: toggle,
         })}
-        <div style={{ paddingRight: 20 }}>
+        <div className='p-r-20'>
           <Dropdown overlay={userMenu}>
-            <Button style={{ fontWeight: 700}}>
-              <UserOutlined/> {session?.user.email} <DownOutlined />
+            <Button style={{ fontWeight: 700, paddingLeft: 8 }}>
+              <Image
+                className={styles.avatar}
+                height={26}
+                width={26}
+                preview={false}
+                src={session?.user.image}
+              />
+                {session?.user.email}
+              <DownOutlined />
             </Button>
           </Dropdown>
         </div>

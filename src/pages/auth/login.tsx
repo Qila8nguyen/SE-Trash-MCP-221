@@ -90,7 +90,7 @@ const Login = () => {
           </div>
 
           <Space direction='vertical' style={{width:'100%'}}>
-            {loginProviders && Object.values(loginProviders).map((provider) => (
+            {loginProviders && Object.values(loginProviders).map((provider: any) => (
               <Button key={provider.name} className='login-form-button' onClick={() => {
                 signIn(provider.id, {
                   callbackUrl: `${window.location.origin}/dashboard`,

@@ -7,25 +7,30 @@ import { AUTH, ROUTE } from '../../configs/constant'
 const Router = ({ children }) => {
   const { status } = useSession()
   const router = useRouter()
+  const { route } = router
 
-  const moveToDashboard = (route) => {
-    if (route === ROUTE.BASE.URL || route === ROUTE.LOGIN.URL)
-      router.push(ROUTE.DASHBOARD.URL)
+  const moveToDashboard = () => {
+    router.push(ROUTE.DASHBOARD.URL)
+  }
+
+  const moveToLogin = () => {
+    router.push(ROUTE.LOGIN.URL)
   }
 
   useEffect(() => {
     if (router.query.error) return
     switch (status) {
       case AUTH.STATUS.UNAUTHENTICATED:
-        router.push(ROUTE.LOGIN.URL)
+        moveToLogin()
         break
       case AUTH.STATUS.AUTHENTICATED:
-        moveToDashboard(router.route)
+        if (route === ROUTE.BASE.URL || route === ROUTE.LOGIN.URL)
+          moveToDashboard()
         break
       default:
         break
     }
-  }, [status, router.route])
+  }, [status, route])
 
   useEffect(() => {
     if (router.query.error) {

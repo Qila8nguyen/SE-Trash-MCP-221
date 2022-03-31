@@ -9,7 +9,6 @@ export const InfoCardItem = (props) => {
   return (
     <div className={className} style={{ ...style, backgroundColor: color}}>
       <Statistic
-        titleStyle
         valueStyle={{fontSize: 30, fontWeight: 500, color: valueColor}}
         className={styles.center}
         title={title}

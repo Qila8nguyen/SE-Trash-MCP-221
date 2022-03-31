@@ -1,4 +1,4 @@
-import { connect } from "mongoose";
+import { connect } from 'mongoose'
 
 global.dbConnection = null
 
@@ -12,4 +12,4 @@ const dbConnect = async () => {
   return dbConnection
 }
 
-export default dbConnect;
+export default dbConnect

@@ -14,6 +14,7 @@ export const InfoCard = (props) => {
       {/* <SemiCircularProgressCard satistic={200} max={1000}/> */}
       {/* <SemiCircularProgressCard satistic={10} max={100}/> */} 
 
+      <InfoCardItem color='#007BFF' valueColor='#030852' className={styles['info-card']} title='Volume' amount='213'/>
     </div>
   )
 }

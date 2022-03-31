@@ -1,15 +1,15 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Layout, Menu } from 'antd'
 import {
   DesktopOutlined,
   TeamOutlined,
   PieChartOutlined,
 } from '@ant-design/icons'
-import styles from '../styles.module.scss'
+import styles from './styles.module.scss'
 import Link from 'next/link'
 import { ROUTE } from '../../../configs/constant'
 import { useRouter } from 'next/router'
-import { AppContext } from '../../../pages/_app'
+import { useAppSelector } from '../../../redux/hooks'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
@@ -18,7 +18,7 @@ export const SideMenuLayout = (props) => {
   const { collapsed } = props
   const route = useRouter()
 
-  const { sideMenuData } = useContext(AppContext)
+  const sideMenuData = useAppSelector(state => state.layout.data)
 
   const mapNameToIcon = (name) => {
     switch (name) {
