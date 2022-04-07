@@ -1,9 +1,10 @@
 import { Skeleton } from 'antd'
+import React from 'react'
 
-export default function Home() {
+const IndexPage = () => {
   return (
-    <div >
-      <Skeleton />
-    </div>
+    <Skeleton />
   )
 }
+
+export default IndexPage
