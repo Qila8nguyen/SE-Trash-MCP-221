@@ -1,6 +1,10 @@
-@import './antd.custom.scss';
-@import './login.scss';
+@import "./antd.custom.scss";
+@import "./login.scss";
 
 .p-r-20 {
   padding-right: 20px;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
 }
