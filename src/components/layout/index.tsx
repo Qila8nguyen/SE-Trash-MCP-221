@@ -12,39 +12,46 @@ import React, { useState } from "react";
 
 const CustomLayout = (props: any) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState<string>("homepage");
+
+  const onSelectMenu = ({ item, key, keyPath, selectedKeys, domEvent }) => {
+    console.log(">>>  key = ", key);
+    setSelectedMenu(key);
+  };
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <Menu
           theme="dark"
           mode="inline"
+          onSelect={onSelectMenu}
           defaultSelectedKeys={["1"]}
           items={[
             {
-              key: "1",
+              key: "homepage",
               icon: <UserOutlined />,
               label: "Trang của tôi",
             },
             {
-              key: "2",
+              key: "manageCar",
               icon: <VideoCameraOutlined />,
               label: "Quản lí xe",
             },
             {
-              key: "3",
+              key: "manageMCP",
               icon: <UploadOutlined />,
               label: "Quản lí MCP",
             },
             {
-              key: "4",
+              key: "personal",
               icon: <UploadOutlined />,
-              label: "",
+              label: "Thông tin cá nhân",
             },
           ]}
         />
       </Sider>
       <Layout className="site-layout">
-        <Header className="site-layout-background" style={{ padding: 0 }}>
+        <Header className="site-layout-background" style={{ padding: 10 }}>
           {React.createElement(
             collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
             {
@@ -53,7 +60,7 @@ const CustomLayout = (props: any) => {
             }
           )}
         </Header>
-        <div style={{ padding: "10px" }}>{props.children}</div>
+        <div style={{ padding: "20px" }}>{props.children}</div>
       </Layout>
     </Layout>
   );
