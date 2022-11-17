@@ -1,13 +1,13 @@
 ## Getting Started
 
-Node version: 16.x
+Node version: 18.12.0
 
 First, install dependencies:
 
 ```bash
 npm install
 # or
-yarn install
+yarn
 ```
 
 Second, run the development server:
@@ -18,6 +18,4 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:4000](http://localhost:4000) with your browser to see the result.
-
-# SE-Trash-MCP-221
+Open [http://localhost:4000/back-officer](http://localhost:4000/back-officer) with your browser to see the result.
