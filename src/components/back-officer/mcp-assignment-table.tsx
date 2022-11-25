@@ -59,7 +59,7 @@ type AssignMCPTableProps = {
   setStep: any;
 };
 
-const AssignMCPTable = (props: AssignMCPTableProps) => {
+export const AssignMCPTable = (props: AssignMCPTableProps) => {
   const { setStep } = props;
 
   const [dataSource, setDataSource] = useState(dummy);
@@ -172,4 +172,4 @@ const AssignMCPTable = (props: AssignMCPTableProps) => {
   );
 };
 
-export default AssignMCPTable;
+// export const AssignMCPTable;

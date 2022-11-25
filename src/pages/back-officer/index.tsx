@@ -1,19 +1,15 @@
-import React, { useState } from "react";
-import AssignMCPTable from "../../components/back-officer/mcp-assignment-table";
-import ViewMCPTable from "../../components/back-officer/mcp-view";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
-const BackOfficerDashboard = () => {
-  const [step, setStep] = useState<number>(0);
-
-  return (
-    <div>
-      {step === 0 ? (
-        <ViewMCPTable setStep={setStep} />
-      ) : (
-        <AssignMCPTable setStep={setStep} />
-      )}
-    </div>
-  );
+const Index = () => {
+  const router = useRouter();
+  const { pathname } = router;
+  console.log("router", router);
+  useEffect(() => {
+    console.log("IOndex");
+    router.push(`${pathname}/manageMCP`);
+  }, []);
+  return <div>Index</div>;
 };
 
-export default BackOfficerDashboard;
+export default Index;

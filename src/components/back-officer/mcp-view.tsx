@@ -3,12 +3,12 @@ import type { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import GgMap from "./gg-map";
 import Polyline from "./polyline";
-import styles from "./styles.module.scss";
 
 const apiKey = "AIzaSyBYJThjFIlEFgCDOKEzPRbEwdl2CfEmg4s";
 
 interface MCPViewProp {
   key: number;
+  id: number;
   name: string;
   status: string;
   capacity: number;
@@ -18,6 +18,7 @@ interface MCPViewProp {
 const dummy: MCPViewProp[] = [
   {
     key: 1,
+    id: 1,
     name: "MCP A-B",
     status: "ready",
     capacity: 69,
@@ -25,6 +26,7 @@ const dummy: MCPViewProp[] = [
   },
   {
     key: 2,
+    id: 2,
     name: "MCP A-B",
     status: "ready",
     capacity: 69,
@@ -32,6 +34,7 @@ const dummy: MCPViewProp[] = [
   },
   {
     key: 3,
+    id: 3,
     name: "MCP A-B",
     status: "ready",
     capacity: 69,
@@ -39,6 +42,7 @@ const dummy: MCPViewProp[] = [
   },
   {
     key: 4,
+    id: 4,
     name: "MCP A-B",
     status: "ready",
     capacity: 69,
@@ -46,6 +50,7 @@ const dummy: MCPViewProp[] = [
   },
   {
     key: 5,
+    id: 5,
     name: "MCP A-B",
     status: "ready",
     capacity: 69,
@@ -57,7 +62,7 @@ type ViewMCPTableProps = {
   setStep: any;
 };
 
-const ViewMCPTable = (props: ViewMCPTableProps) => {
+export const ViewMCPTable = (props: ViewMCPTableProps) => {
   const { setStep } = props;
   const [dataSource, setDataSource] = useState<MCPViewProp[]>(dummy);
   const [isVisibleDeleteModal, setIsVisibleDeleteModal] =
@@ -117,14 +122,17 @@ const ViewMCPTable = (props: ViewMCPTableProps) => {
   ];
 
   return (
-    <div className={styles.container}>
+    <div>
       <Modal
         open={isVisibleDeleteModal}
         onOk={onOkDeleteModal}
         onCancel={onCancleDeleteModal}
       >
-        {"Bạn có muốn xóa MCP này?"}
+        <Typography.Title level={2}>
+          {"Bạn có muốn xóa MCP này?"}
+        </Typography.Title>
       </Modal>
+      <Typography.Title level={2}>MCPs</Typography.Title>
       <Table columns={columns} dataSource={dataSource} />
       <Polyline
         googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback`}
@@ -144,4 +152,4 @@ const ViewMCPTable = (props: ViewMCPTableProps) => {
   );
 };
 
-export default ViewMCPTable;
+// export default ViewMCPTable;

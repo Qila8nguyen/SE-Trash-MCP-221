@@ -26,16 +26,22 @@ const optionsPolyline = {
 
 const positions = [
   {
+    id: 1,
+    key: 1,
     lat: 21.027763,
     lng: 105.83416,
     label: "position 1",
   },
   {
+    id: 2,
+    key: 2,
     lat: 21.027763,
     lng: 106,
     label: "position 2",
   },
   {
+    id: 3,
+    key: 3,
     lat: 21.127763,
     lng: 106.1,
     label: "position 3",

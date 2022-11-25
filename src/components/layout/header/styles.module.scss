@@ -1,0 +1,27 @@
+.header {
+  position: relative;
+  float: right;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+
+
+.header > span {
+  cursor: pointer;
+}
+
+.header > span:not(:last-child),
+.header > div:not(:last-child) {
+  padding-right: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container > span {
+  line-height: initial;
+}
