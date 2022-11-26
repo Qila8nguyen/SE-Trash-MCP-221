@@ -4,7 +4,7 @@ Node version: 18.12.0
 
 First, install dependencies:
 
-## Install yarn
+## Install yarn cli
 
 ```bash
 npm install yarn
@@ -18,21 +18,43 @@ yarn
 
 ### Create .env.local
 
-Enter this into .env.local
-
-```
-APP_PORT=4000
-```
+Copy file .env.example
 
 ### Run Server
 
-Second, run the development server:
+#### For Windows and also MacOS:
 
-# or
+```
+yarn win
+```
 
+#### For MacOS:
+
+```
 yarn dev
+```
+
+### Create Account and Role
+
+1. src/pages/api/auth/login.tsx
+2. Create New User in const users:
+
+```
+  {
+    id: "nhannt",
+    username: "thanhnhan",
+    password: "87654321",
+    role: "back-officer",
+  },
+```
+
+3. Run Server
+4. Enter correct username, password. If lazy, you can just use [nghi - 123456]
+5. Save current state in Local Storage (check it out)
+6. Only logout will the server kick you to the login page again -> Click the ava -> Logout
+
+Open [http://localhost:4000](http://localhost:4000) with your browser to see the result.
 
 ```
 
-Open [http://localhost:4000/back-officer](http://localhost:4000/back-officer) with your browser to see the result.
 ```
