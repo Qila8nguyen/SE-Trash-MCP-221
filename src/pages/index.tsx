@@ -4,17 +4,12 @@ import LoginForm from "../components/login";
 import { useAuth } from "../store/auth-context";
 
 const LoginIndexPage = () => {
-  const authen = useAuth();
+  const { loading, user, isAuthenticated } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    console.log("authen at index", authen);
-    if (authen.isAuthenticated) {
-      const { user } = authen;
-      console.log("------ user", user);
-      // router.push(`/${user?.role}`);
-    }
-  }, [authen]);
+    console.log("----- authen at index", user);
+  }, [user]);
   return <LoginForm />;
 };
 

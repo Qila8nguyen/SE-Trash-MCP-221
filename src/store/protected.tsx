@@ -8,12 +8,9 @@ export const ProtectRoute = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("client side", user);
-
-    if (!isAuthenticated) {
-      router.push("/");
-    }
+    console.log("---- At client side", loading, user);
   }, [user]);
+
   if (loading || (!isAuthenticated && router.pathname !== "/")) {
     return <Skeleton />;
   }

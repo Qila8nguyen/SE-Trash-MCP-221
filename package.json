@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "export NODE_TLS_REJECT_UNAUTHORIZED=0 && source .env.local && next dev -p $APP_PORT",
+    "dev": "source .env.local && next dev -p $APP_PORT",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

@@ -21,7 +21,7 @@ const AuthContext = createContext({
 });
 
 export const getUser = async (ctx) => {
-  console.log("----- COOKIES ", ctx);
+  // console.log("----- COOKIES ", ctx);
   return await axios
     .get(`${process.env.NEXT_PUBLIC_API_URL}/token`)
     .then((res) => res.data)
@@ -31,18 +31,42 @@ export const getUser = async (ctx) => {
 export const AuthProvider = (props) => {
   const [user, setUser] = useState<UserInfo>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [logoutState, setLogoutState] = useState<boolean>(true);
+  const [logoutState, setLogoutState] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log("this is client", user);
+    setLoading(true);
+    const val = JSON.parse(window.localStorage.getItem("User-Data"));
+    if (!val) {
+      router.push("/");
+    }
+
+    if (val) {
+      setUser(val);
+      setLogoutState(false);
+    } else {
+      setLogoutState(true);
+    }
+
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
     if (user) {
       window.localStorage.setItem("User-Data", JSON.stringify(user));
+    } else {
+      const val = JSON.parse(window.localStorage.getItem("User-Data"));
+      if (val) {
+        setUser(val);
+        setLogoutState(false);
+      }
     }
   }, [user]);
 
   useEffect(() => {
+    console.log("LOGOUT STATE", logoutState);
     if (logoutState) {
       window.localStorage.clear();
+      setUser(null);
     }
   }, [logoutState]);
 

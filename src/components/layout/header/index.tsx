@@ -14,13 +14,12 @@ type LayoutHeaderProps = {
 export const LayoutHeader: React.FC<LayoutHeaderProps> = (props) => {
   const { setOpenMessenger } = props;
   const { user, loading, logout } = useAuth();
-  console.log(">>>>>>>>> user", user);
 
   const onLogout = async () => {
     const res = await logout().then((res) => res);
-
-    console.log("AFTER LOGOUT AUTH =", res);
+    console.log("AFTER LOGOUT AUTH =", user);
   };
+
   return (
     <div className={styles.header}>
       <FolderOutlined style={{ fontSize: "30px" }} />

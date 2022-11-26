@@ -12,13 +12,14 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const { path } = pageProps;
   const router = useRouter();
 
-  useEffect(() => {
-    const val = window.localStorage.getItem("User-Data");
-    if (!val) {
-      router.push("/");
-    } else if (val) {
-    }
-  }, []);
+  // useEffect(() => {
+  //   const val = window.localStorage.getItem("User-Data");
+  //   if (!val) {
+  //     router.push("/");
+  //   } else if (val) {
+  //     console.log("has local storage");
+  //   }
+  // }, []);
 
   return (
     <AuthProvider>
@@ -37,9 +38,7 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 
 MyApp.getInitialProps = async (appContext: any) => {
   const { req, res } = appContext;
-  const auth = getUser(appContext?.req);
   return {
-    auth,
     pageProps: {
       path: appContext?.ctx.pathname,
     },
