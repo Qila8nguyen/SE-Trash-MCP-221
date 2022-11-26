@@ -5,8 +5,9 @@ import {
   Polyline,
   LoadScript,
   useJsApiLoader,
+  InfoBox,
 } from "@react-google-maps/api";
-import InfoBox from "react-google-maps/lib/components/addons/InfoBox";
+
 import { Spin } from "antd";
 
 const options = { closeBoxURL: "", enableEventPropagation: true };
@@ -29,27 +30,27 @@ const positions = [
   {
     id: 1,
     key: 1,
-    lat: 10.762622,
-    lng: 106.00172,
+    lat: 10.562622,
+    lng: 106.66092,
     label: "position 1",
   },
   {
     id: 2,
     key: 2,
-    lat: 10.762622,
-    lng: 106,
+    lat: 10.562622,
+    lng: 106.660172,
     label: "position 2",
   },
   {
     id: 3,
     key: 3,
-    lat: 10.788,
-    lng: 106.2,
+    lat: 10.562,
+    lng: 106.661,
     label: "position 3",
   },
 ];
 
-const center = { lat: 10.762622, lng: 106.660172 };
+const center = { lat: 10.562622, lng: 106.660172 };
 
 const PolylineMap = () => {
   const [map, setMap] = React.useState(null);
@@ -61,11 +62,10 @@ const PolylineMap = () => {
     console.log("loading map", map);
     setMap(map);
   }, []);
-  const apiKey = "AIzaSyBYJThjFIlEFgCDOKEzPRbEwdl2CfEmg4s";
+  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: apiKey, // ,
-    // ...otherOptions
+    googleMapsApiKey: apiKey,
   });
 
   if (loadError) {
@@ -74,17 +74,16 @@ const PolylineMap = () => {
   return isLoaded ? (
     <GoogleMap
       id="circle-example"
-      zoom={5}
+      zoom={100}
       center={center}
       onLoad={onLoad}
       mapContainerStyle={{
-        height: "600px",
-        // width: "800px",
+        height: "500px",
       }}
     >
       {positions &&
         positions.map((position, index) => (
-          <Marker position={map}>
+          <Marker position={position}>
             <InfoBox options={options}>
               <>
                 <div

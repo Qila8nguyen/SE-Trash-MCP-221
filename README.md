@@ -54,7 +54,3 @@ yarn dev
 6. Only logout will the server kick you to the login page again -> Click the ava -> Logout
 
 Open [http://localhost:4000](http://localhost:4000) with your browser to see the result.
-
-```
-
-```

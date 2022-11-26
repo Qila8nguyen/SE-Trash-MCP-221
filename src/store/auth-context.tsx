@@ -1,5 +1,4 @@
 import axios, { Axios } from "axios";
-import { getCookie } from "cookies-next";
 import router from "next/router";
 import { createContext, useContext, useEffect, useState } from "react";
 

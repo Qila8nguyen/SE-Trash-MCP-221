@@ -1,5 +1,3 @@
-import { getCookie, setCookie } from "cookies-next";
-
 const users = [
   {
     id: "nghindp",
