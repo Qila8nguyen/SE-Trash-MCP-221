@@ -134,7 +134,7 @@ export const ViewMCPTable = (props: ViewMCPTableProps) => {
       </Modal>
       <Typography.Title level={2}>MCPs</Typography.Title>
       <Table columns={columns} dataSource={dataSource} />
-      <Polyline
+      {/* <Polyline
         googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback`}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={
@@ -146,8 +146,9 @@ export const ViewMCPTable = (props: ViewMCPTableProps) => {
             }}
           />
         }
-        mapElement={<div style={{ height: `100%` }} />}
-      />
+        mapElement={<div style={{ height: `100%` }} />} */}
+      {/* /> */}
+      <Polyline />
     </div>
   );
 };
