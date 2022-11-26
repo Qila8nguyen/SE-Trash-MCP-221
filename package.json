@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "source .env.local && next dev -p $APP_PORT",
+    "dev": "dotenv -e .env.local -- next dev -p 4000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -17,6 +17,7 @@
     "classnames": "^2.3.2",
     "cookies": "^0.8.0",
     "cookies-next": "^2.1.1",
+    "dot-env": "^0.0.1",
     "mongoose": "^6.7.2",
     "next": "^13.0.3",
     "next-redux-wrapper": "^8.0.0",
