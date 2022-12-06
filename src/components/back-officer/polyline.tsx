@@ -31,21 +31,21 @@ const positions = [
     id: 1,
     key: 1,
     lat: 10.562622,
-    lng: 106.66092,
+    lng: 106.51092,
     label: "position 1",
   },
   {
     id: 2,
     key: 2,
     lat: 10.562622,
-    lng: 106.660172,
+    lng: 106.564172,
     label: "position 2",
   },
   {
     id: 3,
     key: 3,
-    lat: 10.562,
-    lng: 106.661,
+    lat: 10.662,
+    lng: 106.561,
     label: "position 3",
   },
 ];
@@ -62,7 +62,8 @@ const PolylineMap = () => {
     console.log("loading map", map);
     setMap(map);
   }, []);
-  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+  // const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+  const apiKey = "AIzaSyBYJThjFIlEFgCDOKEzPRbEwdl2CfEmg4s";
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: apiKey,

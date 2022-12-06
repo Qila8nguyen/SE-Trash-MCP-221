@@ -20,9 +20,9 @@ const AuthContext = createContext({
 });
 
 export const getUser = async (ctx) => {
-  // console.log("----- COOKIES ", ctx);
   return await axios
-    .get(`${process.env.NEXT_PUBLIC_API_URL}/token`)
+    // .get(`${process.env.NEXT_PUBLIC_API_URL}/token`)
+    .get("http://localhost:4000/api/auth/token")
     .then((res) => res.data)
     .catch((err) => err);
 };
@@ -73,7 +73,8 @@ export const AuthProvider = (props) => {
     setLoading(true);
     return await axios({
       method: "post",
-      url: `${process.env.NEXT_PUBLIC_API_URL}/login`,
+      // url: `${process.env.NEXT_PUBLIC_API_URL}/login`,
+      url: "http://localhost:4000/api/auth/login",
       data: { username, password },
       withCredentials: true,
     })
@@ -94,7 +95,8 @@ export const AuthProvider = (props) => {
   const logout = async () => {
     setLoading(true);
     return await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {})
+      // .get(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {})
+      .get("http://localhost:4000/api/auth/logout", {})
       .then((res) => {
         router.push("/");
         console.log("user logged out", res.data);

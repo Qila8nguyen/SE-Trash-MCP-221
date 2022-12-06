@@ -11,6 +11,12 @@ const users = [
     password: "87654321",
     role: "back-officer",
   },
+  {
+    id: "tan",
+    username: "thanhnhan",
+    password: "87654321",
+    role: "janitor",
+  },
 ];
 
 export default function login(req, res) {
