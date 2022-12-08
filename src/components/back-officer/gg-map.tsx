@@ -16,7 +16,7 @@ const Map = (props: { latitude: number; longitude: number }) => {
     googleMapsApiKey: "YOUR_API_KEY",
   });
 
-  const center = { lat: 21.027763, lng: 105.83416 };
+  const center = { lat: 10.56, lng: 106.53416 };
 
   const [map, setMap] = React.useState(null);
 
