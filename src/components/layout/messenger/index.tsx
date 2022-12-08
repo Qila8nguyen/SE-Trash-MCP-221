@@ -24,7 +24,7 @@ interface UserItem {
   name: string;
   picture: string;
 }
-const ContainerHeight = "75vh";
+const ContainerHeight = 300;
 
 const dummy: UserItem[] = [
   {

@@ -1,89 +1,84 @@
 import { Button, Modal, Space, Table, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
-import GgMap from "./gg-map";
+import {
+  Assignee,
+  assigneeList,
+  MCPDetail,
+  MCPViewProp,
+  Status,
+} from "../misc/constant";
+import NewRouteFormModal from "../modal/form";
 import Polyline from "./polyline";
 
-const apiKey = "AIzaSyBYJThjFIlEFgCDOKEzPRbEwdl2CfEmg4s";
-
-interface MCPViewProp {
-  key: number;
-  id: number;
-  name: string;
-  status: string;
-  capacity: number;
-  distance: number;
-}
-
-const dummy: MCPViewProp[] = [
-  {
-    key: 1,
-    id: 1,
-    name: "MCP A-B",
-    status: "ready",
-    capacity: 69,
-    distance: 100,
-  },
-  {
-    key: 2,
-    id: 2,
-    name: "MCP A-B",
-    status: "ready",
-    capacity: 69,
-    distance: 100,
-  },
-  {
-    key: 3,
-    id: 3,
-    name: "MCP A-B",
-    status: "ready",
-    capacity: 69,
-    distance: 100,
-  },
-  {
-    key: 4,
-    id: 4,
-    name: "MCP A-B",
-    status: "ready",
-    capacity: 69,
-    distance: 100,
-  },
-  {
-    key: 5,
-    id: 5,
-    name: "MCP A-B",
-    status: "ready",
-    capacity: 69,
-    distance: 100,
-  },
-];
+const { sin, cos, asin, acos } = Math;
 
 type ViewMCPTableProps = {
   setStep: any;
+  data: MCPViewProp[];
+  pickMCP: (mcp: MCPViewProp) => void;
 };
 
-export const ViewMCPTable = (props: ViewMCPTableProps) => {
-  const { setStep } = props;
-  const [dataSource, setDataSource] = useState<MCPViewProp[]>(dummy);
+export const ViewMCPTable: React.FC<ViewMCPTableProps> = (
+  props: ViewMCPTableProps
+) => {
+  const { setStep, data, pickMCP } = props;
+  const [dataSource, setDataSource] = useState<MCPViewProp[]>(data);
   const [isVisibleDeleteModal, setIsVisibleDeleteModal] =
+    useState<boolean>(false);
+  const [deletedRow, setDeletedRow] = useState<MCPViewProp>(null);
+  const [isFormNewRouteModal, setIsFormNewRouteModal] =
     useState<boolean>(false);
 
   const onOkDeleteModal = () => {
     setIsVisibleDeleteModal(false);
+    setDataSource(dataSource.filter((item) => item !== deletedRow));
   };
 
   const onCancleDeleteModal = () => {
     setIsVisibleDeleteModal(false);
   };
   const onClickDelete = (keySelected: MCPViewProp) => {
-    // test :>>
     console.log("keySelected", keySelected);
     setIsVisibleDeleteModal(true);
-    // setDataSource(dataSource.filter((item) => item !== keySelected));
+    setDeletedRow(keySelected);
   };
 
-  const onAssign = (value: any) => {
+  const onAddNewMCP = (
+    src: MCPDetail,
+    dest: MCPDetail,
+    status: Status = Status.READY,
+    capacity: number = 80.2
+  ) => {
+    const newRoute: MCPViewProp = {
+      key: dataSource.length,
+      id: dataSource.length,
+      name: `MCP ${src.name} - ${dest.name}`,
+      status,
+      capacity,
+      distance: parseFloat(
+        (
+          6378 *
+          acos(
+            sin(src.lat) * sin(dest.lat) +
+              cos(src.lat) * cos(dest.lat) * cos(dest.lng - src.lng)
+          )
+        ).toFixed(3)
+      ),
+    };
+
+    setDataSource([...dataSource, newRoute]);
+    setIsFormNewRouteModal(false);
+  };
+
+  const onCancelRouteModal = () => {
+    setIsFormNewRouteModal(false);
+  };
+
+  const onAssign = (value: MCPViewProp) => {
     setStep(1);
+    console.log(">>>>> value", value);
+    pickMCP(value);
   };
   const columns: ColumnsType<MCPViewProp> = [
     {
@@ -109,11 +104,17 @@ export const ViewMCPTable = (props: ViewMCPTableProps) => {
       render: (value: any) => <Typography.Text>{value} km</Typography.Text>,
     },
     {
+      title: "Phân công",
+      dataIndex: ["assignee", "name"],
+      key: "assignee",
+      render: (value: any) => (value ? value : "-"),
+    },
+    {
       title: "",
       key: "action",
       render: (_, record: MCPViewProp) => (
         <Space size="middle">
-          <Button onClick={onAssign}>Assign MCP</Button>
+          <Button onClick={() => onAssign(record)}>Assign MCP</Button>
           <Button type="primary">Edit</Button>
           <Button onClick={() => onClickDelete(record)}>Delete</Button>
         </Space>
@@ -123,6 +124,11 @@ export const ViewMCPTable = (props: ViewMCPTableProps) => {
 
   return (
     <div>
+      <NewRouteFormModal
+        visible={isFormNewRouteModal}
+        onOkAdd={onAddNewMCP}
+        onCancel={onCancelRouteModal}
+      />
       <Modal
         open={isVisibleDeleteModal}
         onOk={onOkDeleteModal}
@@ -132,22 +138,19 @@ export const ViewMCPTable = (props: ViewMCPTableProps) => {
           {"Bạn có muốn xóa MCP này?"}
         </Typography.Title>
       </Modal>
-      <Typography.Title level={2}>MCPs</Typography.Title>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography.Title level={2}>MCPs</Typography.Title>
+        <Button type="primary" onClick={() => setIsFormNewRouteModal(true)}>
+          Add New MCP Route
+        </Button>
+      </div>
       <Table columns={columns} dataSource={dataSource} />
-      {/* <Polyline
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback`}
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={
-          <div
-            style={{
-              height: `90vh`,
-              margin: `auto`,
-              border: "2px solid black",
-            }}
-          />
-        }
-        mapElement={<div style={{ height: `100%` }} />} */}
-      {/* /> */}
       <Polyline />
     </div>
   );

@@ -2,67 +2,17 @@ import { Button, Modal, Space, Table, Typography } from "antd";
 import React, { useState } from "react";
 import type { ColumnsType } from "antd/es/table";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-
-interface Assignee {
-  key: number;
-  id: string;
-  name: string;
-  role: string;
-  email: string;
-  phone: string;
-}
-
-const dummy: Assignee[] = [
-  {
-    key: 1,
-    id: "0xxxxxxx",
-    name: "Nguyễn Văn A",
-    role: "Người thu gom",
-    email: "a.nguyen@gmail.com",
-    phone: "83838000923",
-  },
-  {
-    key: 2,
-    id: "0xxxxxxx",
-    name: "Nguyễn Văn A",
-    role: "Người thu gom",
-    email: "a.nguyen@gmail.com",
-    phone: "83838000923",
-  },
-  {
-    key: 3,
-    id: "0xxxxxxx",
-    name: "Nguyễn Văn A",
-    role: "Người thu gom",
-    email: "a.nguyen@gmail.com",
-    phone: "83838000923",
-  },
-  {
-    key: 4,
-    id: "11xxxxxxx",
-    name: "Nguyễn Thị KA",
-    role: "Người thu gom",
-    email: "kkka.nguyen@gmail.com",
-    phone: "83838000923",
-  },
-  {
-    key: 5,
-    id: "32xxxxxxx",
-    name: "Nguyễn Văn A",
-    role: "Người thu gom",
-    email: "a.nguyen@gmail.com",
-    phone: "83838000923",
-  },
-];
+import { Assignee, assigneeList } from "../misc/constant";
 
 type AssignMCPTableProps = {
   setStep: any;
+  setData: any;
 };
 
 export const AssignMCPTable = (props: AssignMCPTableProps) => {
-  const { setStep } = props;
+  const { setStep, setData } = props;
 
-  const [dataSource, setDataSource] = useState(dummy);
+  const [assignees, setAssignees] = useState<Assignee[]>(assigneeList);
   const [pickedAssignee, setPickedAssignee] = useState<Assignee>(null);
   const [openAssignModal, setOpenAssignModal] = useState<boolean>(false);
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
@@ -70,6 +20,7 @@ export const AssignMCPTable = (props: AssignMCPTableProps) => {
   const onOkAssignModal = () => {
     setOpenAssignModal(false);
     // assign :>>>
+    setData(pickedAssignee)
   };
 
   const onCancelAssignModal = () => {
@@ -81,12 +32,11 @@ export const AssignMCPTable = (props: AssignMCPTableProps) => {
   };
 
   const onOkDeleteModal = () => {
-    setDataSource(dataSource.filter((item) => item !== pickedAssignee));
+    setAssignees(assignees.filter((item) => item !== pickedAssignee));
     setOpenDeleteModal(false);
   };
 
   const onAssignToMCP = (value: Assignee) => {
-    // :>>>>
     console.log("value", value);
     setPickedAssignee(value);
     setOpenAssignModal(true);
@@ -167,7 +117,7 @@ export const AssignMCPTable = (props: AssignMCPTableProps) => {
         <Typography.Title level={2}>{"MCP Asssignment"}</Typography.Title>
         <ArrowLeftOutlined onClick={back2ViewMCP} />
       </div>
-      <Table columns={columns} dataSource={dataSource} />
+      <Table columns={columns} dataSource={assignees} />
     </>
   );
 };

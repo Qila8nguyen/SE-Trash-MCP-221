@@ -12,8 +12,8 @@ const users = [
     role: "back-officer",
   },
   {
-    id: "tan",
-    username: "thanhnhan",
+    id: "bien",
+    username: "longbien",
     password: "87654321",
     role: "janitor",
   },
@@ -28,12 +28,6 @@ export default function login(req, res) {
     const user = users.find(
       (item) => item.username + item.password === username + password
     );
-    // setCookie("Login-State", "SIGNED_IN", { req, res, maxAge: 60 * 60 * 24 });
-    // setCookie(
-    //   "User-Data",
-    //   { role: user.role, id: user.id, username: user.username },
-    //   { req, res, maxAge: 60 * 60 * 24 }
-    // );
     res
       .status(200)
       .json({ role: user.role, id: user.id, username: user.username });

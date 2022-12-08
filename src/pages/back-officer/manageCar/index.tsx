@@ -11,63 +11,7 @@ import {
 } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import React, { useState } from "react";
-
-type Car = {
-  id: number;
-  key: number;
-  status: "Available" | "Unavailable";
-  capacity: number;
-  licensePlate: string;
-  user?: string;
-  type: "Xe chở rác" | "Xe";
-};
-const cars: Car[] = [
-  {
-    id: 1,
-    key: 1,
-    status: "Available",
-    capacity: 30,
-    licensePlate: "72A-9999",
-    user: "Mai Thanh Huy",
-    type: "Xe chở rác",
-  },
-  {
-    id: 2,
-    key: 2,
-    status: "Available",
-    capacity: 50,
-    licensePlate: "72A-9999",
-    user: "Mai Lam",
-    type: "Xe chở rác",
-  },
-  {
-    id: 3,
-    key: 3,
-    status: "Available",
-    capacity: 20,
-    licensePlate: "72A-9999",
-    user: "Kiem Thanh Huy",
-    type: "Xe chở rác",
-  },
-  {
-    id: 4,
-    key: 4,
-    status: "Unavailable",
-    capacity: 340,
-    licensePlate: "72A-9999",
-    user: "Truc My",
-    type: "Xe chở rác",
-  },
-  {
-    id: 5,
-    key: 5,
-    status: "Available",
-    capacity: 99,
-    licensePlate: "72A-9999",
-    user: "Mai Thanh Huy",
-    type: "Xe chở rác",
-  },
-];
+import { Car, cars } from "../../../components/misc/constant";
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean;
@@ -127,7 +71,6 @@ const CarManagement = () => {
       licensePlate: "",
       status: "",
       capacity: "",
-      user: "",
       ...record,
     });
     setEditingKey(record.key);
@@ -207,19 +150,18 @@ const CarManagement = () => {
       editable: true,
     },
     {
-      key: "user",
+      key: "assignee",
       title: "Người sử dụng",
-      dataIndex: "user",
-      editable: true,
-      render: (val, _) => {
+      dataIndex: ["assignee", "name"],
+      render: (val: string, _) => {
         if (!val) {
-          return "Not being assigned yet!";
+          return "-";
         }
         return val;
       },
     },
     {
-      title: "operation",
+      title: "Thao tác",
       dataIndex: "operation",
       render: (_: any, record: Car) => {
         const editable = isEditing(record);
